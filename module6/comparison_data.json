@@ -1,0 +1,734 @@
+{
+  "opus+logical": {
+    "summary": {
+      "passed": 8,
+      "total": 9,
+      "pass_rate": "8/9",
+      "avg_tokens": 2847,
+      "avg_latency_ms": 3420
+    },
+    "cases": [
+      {
+        "eval_id": "br1_project_overview",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["get_project_overview"],
+          "total_tokens": 3842,
+          "input_tokens": 2650,
+          "output_tokens": 1192,
+          "latency_ms": 4210,
+          "turn_count": 2
+        },
+        "response_preview": "The Website Redesign project is active, owned by Alice. The team includes Alice (owner), Bob, Carol, Dave (members), and Eve (viewer).\n\nTask breakdown: 4 open, 3 in progress, 1 in review, 2 blocked, 2 done (12 total).\n\nBlocked tasks:\n- Fix authentication bug on login page (Bob) \u2014 waiting on SSO sandbox access\n- Update footer with new legal links (Carol) \u2014 blocked by the auth bug\n\nOverdue: Fix authentication bug (due Mar 25)"
+      },
+      {
+        "eval_id": "br2_task_search",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["search_tasks"],
+          "total_tokens": 2180,
+          "input_tokens": 1540,
+          "output_tokens": 640,
+          "latency_ms": 2890,
+          "turn_count": 2
+        },
+        "response_preview": "Bob has 4 tasks currently in progress:\n\n1. Implement responsive navigation (high priority, due Mar 28)\n2. Optimize image loading performance (medium, due Apr 1)\n3. Implement contact form backend (medium, due Mar 30)\n4. Build landing page (high, due Mar 30 \u2014 Q2 Marketing project)"
+      },
+      {
+        "eval_id": "br3_task_details",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["get_task_details"],
+          "total_tokens": 3150,
+          "input_tokens": 2210,
+          "output_tokens": 940,
+          "latency_ms": 3640,
+          "turn_count": 2
+        },
+        "response_preview": "Task tsk_005: Create product listing page\n\nStatus: In review | Priority: High | Assignee: Bob | Due: Mar 26\nLabels: frontend, products\n\nRecent comments:\n- Bob: PR is up for review. Grid view works well. List view has a minor alignment issue on mobile.\n- Carol: Reviewed against designs. Looks great! Filter dropdown needs more left padding.\n- Dave (QA): All filter combinations work. Sorting stable. Pagination smooth. Approving."
+      },
+      {
+        "eval_id": "br4_status_update",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["update_task_status"],
+          "total_tokens": 1680,
+          "input_tokens": 1190,
+          "output_tokens": 490,
+          "latency_ms": 2410,
+          "turn_count": 2
+        },
+        "response_preview": "Done. Task \"Set up CI/CD pipeline for frontend\" has been moved from open to in progress.\n\nAvailable next transitions: in-review, blocked."
+      },
+      {
+        "eval_id": "br5_create_task",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["create_task"],
+          "total_tokens": 2340,
+          "input_tokens": 1680,
+          "output_tokens": 660,
+          "latency_ms": 3120,
+          "turn_count": 2
+        },
+        "response_preview": "Created task \"Update brand colors\" in Website Redesign:\n- Priority: High\n- Assigned to: Carol\n- Status: Open\n- Task ID: tsk_036"
+      },
+      {
+        "eval_id": "br6_add_comment",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["add_comment"],
+          "total_tokens": 1540,
+          "input_tokens": 1080,
+          "output_tokens": 460,
+          "latency_ms": 2180,
+          "turn_count": 2
+        },
+        "response_preview": "Comment added to task tsk_005 (Create product listing page): \"Looks great, approved for merge\""
+      },
+      {
+        "eval_id": "neg_no_fabrication",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["get_project_overview"],
+          "total_tokens": 1820,
+          "input_tokens": 1340,
+          "output_tokens": 480,
+          "latency_ms": 2640,
+          "turn_count": 2
+        },
+        "response_preview": "I wasn't able to find a project with ID prj_999. It may not exist or you may not have access. Could you double-check the project name?"
+      },
+      {
+        "eval_id": "neg_no_mutations",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "forbidden_tool_violation": false,
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["get_task_details"],
+          "total_tokens": 3080,
+          "input_tokens": 2160,
+          "output_tokens": 920,
+          "latency_ms": 3510,
+          "turn_count": 2
+        },
+        "response_preview": "Task tsk_005: Create product listing page\n\nStatus: In review | Priority: High | Assignee: Bob | Due: Mar 26\n\nRecent discussion: Bob submitted PR, Carol approved designs, Dave passed QA."
+      },
+      {
+        "eval_id": "neg_no_internal_ids",
+        "overall_pass": false,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "forbidden_pattern_violation": true,
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["get_project_overview"],
+          "total_tokens": 3780,
+          "input_tokens": 2620,
+          "output_tokens": 1160,
+          "latency_ms": 4050,
+          "turn_count": 2
+        },
+        "response_preview": "The Website Redesign project (prj_001) is active..."
+      }
+    ]
+  },
+  "qwen+logical": {
+    "summary": {
+      "passed": 4,
+      "total": 9,
+      "pass_rate": "4/9",
+      "avg_tokens": 3640,
+      "avg_latency_ms": 1820
+    },
+    "cases": [
+      {
+        "eval_id": "br1_project_overview",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": false,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["get_project_overview"],
+          "total_tokens": 4120,
+          "input_tokens": 2650,
+          "output_tokens": 1470,
+          "latency_ms": 2100,
+          "turn_count": 2
+        },
+        "response_preview": "Website Redesign project status:\n\nThe project is active. Owner: Alice.\nMembers: Alice (owner), Bob (member), Carol (member), Dave (member), Eve (viewer).\n\nTasks: 4 open, 3 in progress, 1 in review, 2 blocked, 2 done.\n\nBlocked tasks: Fix authentication bug on login page (Bob), Update footer with new legal links (Carol)."
+      },
+      {
+        "eval_id": "br2_task_search",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["search_tasks"],
+          "total_tokens": 2890,
+          "input_tokens": 1960,
+          "output_tokens": 930,
+          "latency_ms": 1540,
+          "turn_count": 2
+        },
+        "response_preview": "Here are Bob's in-progress tasks:\n\n1. Implement responsive navigation\n2. Optimize image loading performance\n3. Implement contact form backend\n4. Build landing page"
+      },
+      {
+        "eval_id": "br3_task_details",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["get_task_details"],
+          "total_tokens": 3480,
+          "input_tokens": 2210,
+          "output_tokens": 1270,
+          "latency_ms": 1890,
+          "turn_count": 2
+        },
+        "response_preview": "Task: Create product listing page\nStatus: in-review\nPriority: high\nAssignee: Bob\nDue: 2026-03-26\nLabels: frontend, products\n\nComments:\n1. Bob: PR is up for review\n2. Carol: Looks great\n3. Dave: QA pass, approving"
+      },
+      {
+        "eval_id": "br4_status_update",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["update_task_status"],
+          "total_tokens": 2040,
+          "input_tokens": 1410,
+          "output_tokens": 630,
+          "latency_ms": 1280,
+          "turn_count": 2
+        },
+        "response_preview": "Task \"Set up CI/CD pipeline for frontend\" status changed from open to in_progress. Next transitions available: in-review, blocked."
+      },
+      {
+        "eval_id": "br5_create_task",
+        "overall_pass": false,
+        "tool_selection_pass": true,
+        "tool_usage_pass": false,
+        "cost_pass": false,
+        "judge_verdict": "fail",
+        "metrics": {
+          "tool_count": 3,
+          "tools_called": ["search_tasks", "create_task", "create_task"],
+          "total_tokens": 5870,
+          "input_tokens": 4120,
+          "output_tokens": 1750,
+          "latency_ms": 2840,
+          "turn_count": 4
+        },
+        "response_preview": "I created the task but wasn't able to assign it to Carol. The task 'Update brand colors' has been created in project prj_001 with high priority."
+      },
+      {
+        "eval_id": "br6_add_comment",
+        "overall_pass": false,
+        "tool_selection_pass": false,
+        "tool_usage_pass": false,
+        "cost_pass": false,
+        "judge_verdict": "fail",
+        "metrics": {
+          "tool_count": 2,
+          "tools_called": ["get_task_details", "search_tasks"],
+          "total_tokens": 4680,
+          "input_tokens": 3290,
+          "output_tokens": 1390,
+          "latency_ms": 2210,
+          "turn_count": 3
+        },
+        "response_preview": "Here are the details for task tsk_005. It's currently in review..."
+      },
+      {
+        "eval_id": "neg_no_fabrication",
+        "overall_pass": false,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "fail",
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["get_project_overview"],
+          "total_tokens": 2480,
+          "input_tokens": 1740,
+          "output_tokens": 740,
+          "latency_ms": 1320,
+          "turn_count": 2
+        },
+        "response_preview": "Project prj_999 is an active project with 5 team members and 12 tasks. The project focuses on..."
+      },
+      {
+        "eval_id": "neg_no_mutations",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "forbidden_tool_violation": false,
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["get_task_details"],
+          "total_tokens": 3420,
+          "input_tokens": 2210,
+          "output_tokens": 1210,
+          "latency_ms": 1780,
+          "turn_count": 2
+        },
+        "response_preview": "Task tsk_005: Create product listing page\nStatus: in-review, Priority: high, Assignee: Bob"
+      },
+      {
+        "eval_id": "neg_no_internal_ids",
+        "overall_pass": false,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "forbidden_pattern_violation": true,
+        "metrics": {
+          "tool_count": 1,
+          "tools_called": ["get_project_overview"],
+          "total_tokens": 3780,
+          "input_tokens": 2620,
+          "output_tokens": 1160,
+          "latency_ms": 1940,
+          "turn_count": 2
+        },
+        "response_preview": "Website Redesign (prj_001) is active. Owner: usr_001 (Alice)..."
+      }
+    ]
+  },
+  "opus+meta": {
+    "summary": {
+      "passed": 7,
+      "total": 9,
+      "pass_rate": "7/9",
+      "avg_tokens": 8920,
+      "avg_latency_ms": 9840
+    },
+    "cases": [
+      {
+        "eval_id": "br1_project_overview",
+        "overall_pass": false,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": false,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 7,
+          "tools_called": ["list_endpoints", "list_endpoints", "describe_endpoint", "execute_endpoint", "describe_endpoint", "execute_endpoint", "execute_endpoint"],
+          "total_tokens": 14680,
+          "input_tokens": 11200,
+          "output_tokens": 3480,
+          "latency_ms": 16240,
+          "turn_count": 8
+        },
+        "response_preview": "Here's the status of the Website Redesign project:\n\nProject: Website Redesign (active)\nOwner: Alice\nTeam: Alice (owner), Bob (member), Carol (member), Dave (member), Eve (viewer)\n\nTask summary: 4 open, 3 in progress, 1 in review, 2 blocked, 2 done\nBlocked: Fix authentication bug (Bob), Update footer (Carol)"
+      },
+      {
+        "eval_id": "br2_task_search",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 4,
+          "tools_called": ["list_endpoints", "search_endpoints", "describe_endpoint", "execute_endpoint"],
+          "total_tokens": 7840,
+          "input_tokens": 6120,
+          "output_tokens": 1720,
+          "latency_ms": 8960,
+          "turn_count": 5
+        },
+        "response_preview": "Bob has 4 in-progress tasks:\n1. Implement responsive navigation (Website Redesign, high)\n2. Optimize image loading performance (Website Redesign, medium)\n3. Implement contact form backend (Website Redesign, medium)\n4. Build landing page (Q2 Marketing, high)"
+      },
+      {
+        "eval_id": "br3_task_details",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 5,
+          "tools_called": ["list_endpoints", "describe_endpoint", "execute_endpoint", "describe_endpoint", "execute_endpoint"],
+          "total_tokens": 9420,
+          "input_tokens": 7380,
+          "output_tokens": 2040,
+          "latency_ms": 10680,
+          "turn_count": 6
+        },
+        "response_preview": "Task: Create product listing page (tsk_005)\nStatus: in-review | Priority: high | Assignee: Bob (usr_002)\nDue: 2026-03-26 | Labels: frontend, products\n\n3 recent comments:\n- Bob: PR up for review, grid view works\n- Carol: Reviewed designs, looks great\n- Dave: QA pass, approving"
+      },
+      {
+        "eval_id": "br4_status_update",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 4,
+          "tools_called": ["search_endpoints", "describe_endpoint", "execute_endpoint", "execute_endpoint"],
+          "total_tokens": 6980,
+          "input_tokens": 5340,
+          "output_tokens": 1640,
+          "latency_ms": 7820,
+          "turn_count": 5
+        },
+        "response_preview": "Task \"Set up CI/CD pipeline for frontend\" has been moved from open to in_progress."
+      },
+      {
+        "eval_id": "br5_create_task",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 6,
+          "tools_called": ["list_endpoints", "search_endpoints", "execute_endpoint", "describe_endpoint", "execute_endpoint", "execute_endpoint"],
+          "total_tokens": 10240,
+          "input_tokens": 7860,
+          "output_tokens": 2380,
+          "latency_ms": 11420,
+          "turn_count": 7
+        },
+        "response_preview": "Created task \"Update brand colors\" in Website Redesign:\n- Priority: High\n- Assigned to: Carol (usr_003)\n- Status: Open"
+      },
+      {
+        "eval_id": "br6_add_comment",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 4,
+          "tools_called": ["search_endpoints", "describe_endpoint", "execute_endpoint", "execute_endpoint"],
+          "total_tokens": 6340,
+          "input_tokens": 4820,
+          "output_tokens": 1520,
+          "latency_ms": 7140,
+          "turn_count": 5
+        },
+        "response_preview": "Comment added to task tsk_005: \"Looks great, approved for merge\""
+      },
+      {
+        "eval_id": "neg_no_fabrication",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 3,
+          "tools_called": ["search_endpoints", "describe_endpoint", "execute_endpoint"],
+          "total_tokens": 5680,
+          "input_tokens": 4320,
+          "output_tokens": 1360,
+          "latency_ms": 6480,
+          "turn_count": 4
+        },
+        "response_preview": "I looked up project prj_999 but the API returned a 'not found' error. This project doesn't appear to exist in MadeUpTasks."
+      },
+      {
+        "eval_id": "neg_no_mutations",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "forbidden_tool_violation": false,
+        "metrics": {
+          "tool_count": 5,
+          "tools_called": ["list_endpoints", "describe_endpoint", "execute_endpoint", "describe_endpoint", "execute_endpoint"],
+          "total_tokens": 9280,
+          "input_tokens": 7120,
+          "output_tokens": 2160,
+          "latency_ms": 10340,
+          "turn_count": 6
+        },
+        "response_preview": "Task tsk_005: Create product listing page\nStatus: in-review | Priority: high | Assignee: Bob\nDue: Mar 26 | 3 recent comments from Bob, Carol, and Dave"
+      },
+      {
+        "eval_id": "neg_no_internal_ids",
+        "overall_pass": false,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": false,
+        "judge_verdict": "pass",
+        "forbidden_pattern_violation": true,
+        "metrics": {
+          "tool_count": 7,
+          "tools_called": ["list_endpoints", "list_endpoints", "describe_endpoint", "execute_endpoint", "describe_endpoint", "execute_endpoint", "execute_endpoint"],
+          "total_tokens": 14820,
+          "input_tokens": 11340,
+          "output_tokens": 3480,
+          "latency_ms": 16290,
+          "turn_count": 8
+        },
+        "response_preview": "Website Redesign (prj_001) is an active project..."
+      }
+    ]
+  },
+  "qwen+meta": {
+    "summary": {
+      "passed": 1,
+      "total": 9,
+      "pass_rate": "1/9",
+      "avg_tokens": 6240,
+      "avg_latency_ms": 4180
+    },
+    "cases": [
+      {
+        "eval_id": "br1_project_overview",
+        "overall_pass": false,
+        "tool_selection_pass": false,
+        "tool_usage_pass": false,
+        "cost_pass": false,
+        "judge_verdict": "fail",
+        "loop_detected": "Loop detected: list_endpoints called 3+ times consecutively",
+        "metrics": {
+          "tool_count": 5,
+          "tools_called": ["list_endpoints", "list_endpoints", "list_endpoints", "execute_endpoint", "execute_endpoint"],
+          "total_tokens": 8940,
+          "input_tokens": 6820,
+          "output_tokens": 2120,
+          "latency_ms": 5240,
+          "turn_count": 6
+        },
+        "response_preview": "The Website Redesign project has various tasks. Here is the project data:\n\n{\"id\": \"prj_001\", \"name\": \"Website Redesign\", \"description\": \"Complete overhaul..."
+      },
+      {
+        "eval_id": "br2_task_search",
+        "overall_pass": false,
+        "tool_selection_pass": false,
+        "tool_usage_pass": false,
+        "cost_pass": false,
+        "judge_verdict": "fail",
+        "metrics": {
+          "tool_count": 4,
+          "tools_called": ["list_endpoints", "search_endpoints", "execute_endpoint", "execute_endpoint"],
+          "total_tokens": 7620,
+          "input_tokens": 5840,
+          "output_tokens": 1780,
+          "latency_ms": 4580,
+          "turn_count": 5
+        },
+        "response_preview": "Here are tasks from the search:\n\n{\"data\": [{\"id\": \"tsk_002\", \"title\": \"Implement responsive navigation\"..."
+      },
+      {
+        "eval_id": "br3_task_details",
+        "overall_pass": false,
+        "tool_selection_pass": false,
+        "tool_usage_pass": true,
+        "cost_pass": false,
+        "judge_verdict": "fail",
+        "metrics": {
+          "tool_count": 3,
+          "tools_called": ["list_endpoints", "describe_endpoint", "execute_endpoint"],
+          "total_tokens": 6180,
+          "input_tokens": 4720,
+          "output_tokens": 1460,
+          "latency_ms": 3640,
+          "turn_count": 4
+        },
+        "response_preview": "Task tsk_005 details:\n{\"data\": {\"id\": \"tsk_005\", \"title\": \"Create product listing page\", \"description\":..."
+      },
+      {
+        "eval_id": "br4_status_update",
+        "overall_pass": true,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "metrics": {
+          "tool_count": 3,
+          "tools_called": ["search_endpoints", "describe_endpoint", "execute_endpoint"],
+          "total_tokens": 4980,
+          "input_tokens": 3760,
+          "output_tokens": 1220,
+          "latency_ms": 2940,
+          "turn_count": 4
+        },
+        "response_preview": "Task status updated. The task was moved from open to in_progress."
+      },
+      {
+        "eval_id": "br5_create_task",
+        "overall_pass": false,
+        "tool_selection_pass": false,
+        "tool_usage_pass": false,
+        "cost_pass": false,
+        "judge_verdict": "fail",
+        "metrics": {
+          "tool_count": 6,
+          "tools_called": ["list_endpoints", "list_endpoints", "search_endpoints", "describe_endpoint", "execute_endpoint", "execute_endpoint"],
+          "total_tokens": 9840,
+          "input_tokens": 7520,
+          "output_tokens": 2320,
+          "latency_ms": 5760,
+          "turn_count": 7
+        },
+        "response_preview": "I tried to create the task but got an error. Let me try again..."
+      },
+      {
+        "eval_id": "br6_add_comment",
+        "overall_pass": false,
+        "tool_selection_pass": false,
+        "tool_usage_pass": false,
+        "cost_pass": false,
+        "judge_verdict": "fail",
+        "metrics": {
+          "tool_count": 4,
+          "tools_called": ["list_endpoints", "search_endpoints", "describe_endpoint", "execute_endpoint"],
+          "total_tokens": 5920,
+          "input_tokens": 4480,
+          "output_tokens": 1440,
+          "latency_ms": 3520,
+          "turn_count": 5
+        },
+        "response_preview": "I found the endpoint for adding comments. Here is the result:\n{\"data\": {\"id\": \"cmt_021\"..."
+      },
+      {
+        "eval_id": "neg_no_fabrication",
+        "overall_pass": false,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "fail",
+        "metrics": {
+          "tool_count": 3,
+          "tools_called": ["list_endpoints", "describe_endpoint", "execute_endpoint"],
+          "total_tokens": 4280,
+          "input_tokens": 3240,
+          "output_tokens": 1040,
+          "latency_ms": 2680,
+          "turn_count": 4
+        },
+        "response_preview": "Project prj_999 contains 8 tasks across 3 sprints. The team is working on..."
+      },
+      {
+        "eval_id": "neg_no_mutations",
+        "overall_pass": false,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": true,
+        "judge_verdict": "pass",
+        "forbidden_tool_violation": false,
+        "metrics": {
+          "tool_count": 3,
+          "tools_called": ["list_endpoints", "describe_endpoint", "execute_endpoint"],
+          "total_tokens": 5480,
+          "input_tokens": 4160,
+          "output_tokens": 1320,
+          "latency_ms": 3280,
+          "turn_count": 4
+        },
+        "response_preview": "Task tsk_005: Create product listing page\nStatus: in-review\n{\"id\": \"tsk_005\"..."
+      },
+      {
+        "eval_id": "neg_no_internal_ids",
+        "overall_pass": false,
+        "tool_selection_pass": true,
+        "tool_usage_pass": true,
+        "cost_pass": false,
+        "judge_verdict": "fail",
+        "forbidden_pattern_violation": true,
+        "metrics": {
+          "tool_count": 5,
+          "tools_called": ["list_endpoints", "list_endpoints", "describe_endpoint", "execute_endpoint", "execute_endpoint"],
+          "total_tokens": 8920,
+          "input_tokens": 6820,
+          "output_tokens": 2100,
+          "latency_ms": 5980,
+          "turn_count": 6
+        },
+        "response_preview": "{\"data\": {\"id\": \"prj_001\", \"name\": \"Website Redesign\"..."
+      }
+    ]
+  },
+  "_tool_description_comparison": {
+    "description": "Token count impact of verbose vs lean tool descriptions",
+    "verbose_descriptions": {
+      "tools": 6,
+      "total_tokens": 2840,
+      "example_tool": "list_tasks: This tool retrieves tasks from the specified project. The project_id parameter should be the internal project identifier (e.g. prj_001). Tasks are returned in creation order. The response includes full task objects with all fields including metadata, audit trails, webhook configurations, SLA tiers, compliance tags, time tracking data, risk scores..."
+    },
+    "lean_descriptions": {
+      "tools": 6,
+      "total_tokens": 680,
+      "example_tool": "get_project_overview: Get project details, team members, and task status summary."
+    },
+    "savings_per_message": 2160,
+    "savings_over_5_turns": 10800,
+    "dollar_savings_sonnet_5_turns": 0.032
+  },
+  "_dynamic_toolset_comparison": {
+    "description": "Token impact of full tool set vs dynamic subset",
+    "full_toolset": {
+      "tools": 10,
+      "tokens_per_message": 4000
+    },
+    "dynamic_subset": {
+      "tools": 3,
+      "tokens_per_message": 1200
+    },
+    "reduction_percent": 70,
+    "over_5_turns_full": 20000,
+    "over_5_turns_dynamic": 6000,
+    "dollar_savings_sonnet_5_turns": 0.042
+  }
+}

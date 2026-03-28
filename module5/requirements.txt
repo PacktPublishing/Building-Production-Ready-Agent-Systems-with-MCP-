@@ -1,0 +1,5 @@
+agent-framework-core
+agent-framework-anthropic
+agent-framework-ollama
+pyyaml
+python-dotenv

@@ -1,0 +1,45 @@
+services:
+  madeuptasks-api:
+    build:
+      context: ./madeuptasks-api
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    environment:
+      - SEED_DATA_PATH=/app/seed_data.json
+      - LOG_LEVEL=info
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8090/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  # MCP servers run locally as stdio subprocesses (not Docker services).
+  # These optional service definitions are for integration testing only.
+  madeuptasks-mcp-logical:
+    build:
+      context: ./madeuptasks-mcp-logical
+      dockerfile: Dockerfile
+    environment:
+      - MADEUPTASKS_API_URL=http://madeuptasks-api:8090/api/v1
+      - MADEUPTASKS_API_TOKEN=tf_token_alice
+    depends_on:
+      madeuptasks-api:
+        condition: service_healthy
+    profiles:
+      - mcp
+
+  madeuptasks-mcp-meta:
+    build:
+      context: ./madeuptasks-mcp-meta
+      dockerfile: Dockerfile
+    environment:
+      - MADEUPTASKS_API_URL=http://madeuptasks-api:8090/api/v1
+      - MADEUPTASKS_API_TOKEN=tf_token_alice
+    depends_on:
+      madeuptasks-api:
+        condition: service_healthy
+    profiles:
+      - mcp

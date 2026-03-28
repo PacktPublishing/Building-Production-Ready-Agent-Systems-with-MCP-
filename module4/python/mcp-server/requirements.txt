@@ -1,0 +1,4 @@
+fastmcp>=2.0.0
+httpx>=0.28.0
+pyjwt>=2.8.0
+cryptography>=42.0.0

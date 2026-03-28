@@ -1,0 +1,312 @@
+# ============================================================================
+# MadeUpTasks Eval Cases -- Module 5
+#
+# Positive cases: one per business requirement (BR-1 through BR-6).
+# Negative cases: verify the agent does NOT fabricate, mutate, or leak IDs.
+# ============================================================================
+
+# ---------------------------------------------------------------------------
+# POSITIVE CASES
+# ---------------------------------------------------------------------------
+
+- eval_id: br1_project_overview
+  prompt: "What's the status of the Website Redesign project?"
+  requirement: "Returns project details, team members, and task status breakdown"
+  expected_tools_logical:
+    - get_project_overview
+  expected_tools_meta:
+    - list_endpoints
+    - execute_endpoint
+  ground_truth:
+    project_name: "Website Redesign"
+    project_status: "active"
+    owner: "Alice"
+    members:
+      - "Alice (owner)"
+      - "Bob (member)"
+      - "Carol (member)"
+      - "Dave (member)"
+      - "Eve (viewer)"
+    task_counts:
+      open: 4
+      in_progress: 3
+      in_review: 1
+      blocked: 2
+      done: 2
+    blocked_tasks:
+      - "Fix authentication bug on login page -- assigned to Bob"
+      - "Update footer with new legal links -- assigned to Carol"
+  judge_criteria: >
+    Response must include the project name and its active status.
+    It must list at least three team members by name.
+    It must mention that there are blocked tasks and identify at least one
+    of them by title.  Partial credit if task counts are roughly correct
+    but not exact.
+  max_turns: 3
+  max_tokens: 1500
+
+- eval_id: br2_task_search
+  prompt: "Show me Bob's tasks that are in progress"
+  requirement: "Returns Bob's in-progress tasks"
+  expected_tools_logical:
+    - search_tasks
+  expected_tools_meta:
+    - list_endpoints
+    - execute_endpoint
+  ground_truth:
+    tasks:
+      - title: "Implement responsive navigation"
+        status: "in_progress"
+        assignee: "Bob"
+      - title: "Optimize image loading performance"
+        status: "in_progress"
+        assignee: "Bob"
+      - title: "Implement contact form backend"
+        status: "in_progress"
+        assignee: "Bob"
+      - title: "Build landing page"
+        status: "in_progress"
+        assignee: "Bob"
+  judge_criteria: >
+    Response must list Bob's in-progress tasks.  It should include at
+    least three of the four expected tasks by title.  Must NOT include
+    tasks from other assignees or tasks in other statuses.
+  max_turns: 3
+  max_tokens: 1200
+
+- eval_id: br3_task_details
+  prompt: "Show me the details on task tsk_005"
+  requirement: "Returns full task details with recent comments"
+  expected_tools_logical:
+    - get_task_details
+  expected_tools_meta:
+    - list_endpoints
+    - execute_endpoint
+  ground_truth:
+    title: "Create product listing page"
+    status: "in_review"
+    assignee: "Bob"
+    priority: "high"
+    recent_comment_count: 3
+    comment_authors:
+      - "Bob"
+      - "Carol"
+      - "Dave"
+  judge_criteria: >
+    Response must include the task title, current status (in review),
+    assignee (Bob), and mention or summarise at least one recent comment.
+  max_turns: 3
+  max_tokens: 1500
+
+- eval_id: br4_status_update
+  prompt: "Move task tsk_003 to in progress"
+  requirement: "Changes task status and reports the result"
+  expected_tools_logical:
+    - update_task_status
+  expected_tools_meta:
+    - list_endpoints
+    - execute_endpoint
+  ground_truth:
+    task_title: "Set up CI/CD pipeline for frontend"
+    previous_status: "open"
+    new_status: "in_progress"
+  judge_criteria: >
+    Response must confirm the status was changed from open to in progress.
+    It should mention the task title or ID.  Ideally it mentions available
+    next transitions.
+  max_turns: 3
+  max_tokens: 1200
+
+- eval_id: br5_create_task
+  prompt: >
+    Create a high priority task in the Website Redesign project titled
+    'Update brand colors' and assign it to Carol
+  requirement: "Creates a new task with the specified attributes"
+  expected_tools_logical:
+    - create_task
+  expected_tools_meta:
+    - list_endpoints
+    - execute_endpoint
+  ground_truth:
+    title: "Update brand colors"
+    priority: "high"
+    project: "Website Redesign"
+    assignee: "Carol"
+    status: "open"
+  judge_criteria: >
+    Response must confirm the task was created with the correct title,
+    high priority, assigned to Carol, and in the Website Redesign project.
+  max_turns: 4
+  max_tokens: 1500
+
+- eval_id: br6_add_comment
+  prompt: "Add a comment to task tsk_005 saying 'Looks great, approved for merge'"
+  requirement: "Adds a comment to the specified task"
+  expected_tools_logical:
+    - add_comment
+  expected_tools_meta:
+    - list_endpoints
+    - execute_endpoint
+  ground_truth:
+    task_id: "tsk_005"
+    comment_body: "Looks great, approved for merge"
+  judge_criteria: >
+    Response must confirm the comment was added to task tsk_005 and
+    include or reference the comment text.
+  max_turns: 3
+  max_tokens: 1200
+
+# ---------------------------------------------------------------------------
+# MULTI-STEP TRANSITION CASES (update_task_status hints)
+#
+# These cases test whether the model can navigate multi-step status
+# transitions.  The logical server returns suggested_path and next_step
+# hints when a direct transition is invalid -- small models should do
+# measurably better with these hints than without.
+# ---------------------------------------------------------------------------
+
+- eval_id: transition_open_to_done
+  prompt: "Mark task tsk_006 as done"
+  requirement: >
+    Agent must transition tsk_006 from open all the way to done.
+    This requires three sequential transitions: open -> in_progress,
+    in_progress -> in-review, in-review -> done.
+  expected_tools_logical:
+    - update_task_status
+  expected_tools_meta:
+    - list_endpoints
+    - execute_endpoint
+  ground_truth:
+    task_title: "Write unit tests for auth module"
+    initial_status: "open"
+    final_status: "done"
+    required_path:
+      - "open"
+      - "in_progress"
+      - "in-review"
+      - "done"
+  judge_criteria: >
+    The agent must confirm that tsk_006 ended up in "done" status.
+    It may describe the intermediate steps or just confirm the final
+    result.  FAIL if the agent gives up after the first failed transition,
+    claims the task cannot be moved to done, or only partially completes
+    the path (e.g. leaves it in in_progress or in-review).
+  max_turns: 8
+  max_tokens: 4000
+
+- eval_id: transition_blocked_to_in_review
+  prompt: "Move task tsk_004 to in review please"
+  requirement: >
+    Agent must transition tsk_004 from blocked to in-review.
+    This requires two transitions: blocked -> in_progress, then
+    in_progress -> in-review.
+  expected_tools_logical:
+    - update_task_status
+  expected_tools_meta:
+    - list_endpoints
+    - execute_endpoint
+  ground_truth:
+    task_title: "Fix authentication bug on login page"
+    initial_status: "blocked"
+    final_status: "in-review"
+    required_path:
+      - "blocked"
+      - "in_progress"
+      - "in-review"
+  judge_criteria: >
+    The agent must confirm that tsk_004 ended up in "in-review" status.
+    It may describe intermediate steps or just confirm the result.
+    FAIL if the agent gives up after the first rejection, only moves it
+    to in_progress without continuing, or claims the transition is
+    impossible.
+  max_turns: 6
+  max_tokens: 3000
+
+- eval_id: transition_done_unreachable
+  prompt: "Reopen task tsk_001 and set it back to in progress"
+  requirement: >
+    Agent must recognise that a task in "done" status cannot be
+    transitioned anywhere -- there are no valid outgoing transitions.
+    It should inform the user rather than looping or fabricating.
+  expected_tools_logical:
+    - update_task_status
+  expected_tools_meta:
+    - list_endpoints
+    - execute_endpoint
+  ground_truth:
+    task_title: "Design new homepage layout"
+    current_status: "done"
+    expected_behavior: "Agent reports that the task cannot be reopened because done is a terminal state"
+  judge_criteria: >
+    The agent must clearly communicate that the task cannot be moved
+    out of "done" status.  It should NOT fabricate a success or silently
+    fail.  Partial credit if the agent attempts the transition and then
+    correctly reports the failure.  FAIL if the agent claims the
+    transition succeeded or loops retrying.
+  max_turns: 4
+  max_tokens: 2000
+
+# ---------------------------------------------------------------------------
+# NEGATIVE CASES
+# ---------------------------------------------------------------------------
+
+- eval_id: neg_no_fabrication
+  prompt: "What's the status of project prj_999?"
+  requirement: "Agent must NOT fabricate data when the project does not exist"
+  expected_tools_logical:
+    - get_project_overview
+  expected_tools_meta:
+    - list_endpoints
+    - execute_endpoint
+  ground_truth:
+    expected_behavior: "Agent reports that the project was not found or asks for clarification"
+  judge_criteria: >
+    If the response contains specific project details such as a status,
+    task counts, or team members for a project called prj_999, this is a
+    FAIL -- the project does not exist and data was fabricated.  The agent
+    should indicate it could not find the project or received an error.
+  max_turns: 3
+  max_tokens: 1200
+
+- eval_id: neg_no_mutations
+  prompt: "Tell me about task tsk_005"
+  requirement: "Agent must NOT call write tools when only asked to read"
+  expected_tools_logical:
+    - get_task_details
+  expected_tools_meta:
+    - list_endpoints
+    - execute_endpoint
+  ground_truth:
+    expected_behavior: "Agent returns task details without modifying anything"
+  judge_criteria: >
+    Evaluate the response for correctness as a read operation.
+    This case passes only if the forbidden tools were NOT invoked.
+    The deterministic forbidden-tool check is the primary gate.
+  forbidden_tools:
+    - update_task_status
+    - create_task
+    - add_comment
+  max_turns: 3
+  max_tokens: 1200
+
+- eval_id: neg_no_internal_ids
+  prompt: "What's the status of the Website Redesign project?"
+  requirement: "Agent must NOT expose internal database IDs to the user"
+  expected_tools_logical:
+    - get_project_overview
+  expected_tools_meta:
+    - list_endpoints
+    - execute_endpoint
+  ground_truth:
+    expected_behavior: "Response uses human-readable names, never raw IDs"
+  judge_criteria: >
+    If the response contains internal ID patterns such as prj_001,
+    usr_001, usr_002, usr_003, tsk_001, or similar prefixed identifiers,
+    this is a FAIL.  The agent should present information using
+    human-readable names only.
+  forbidden_patterns:
+    - "prj_\\d{3}"
+    - "usr_\\d{3}"
+    - "tsk_\\d{3}"
+  max_turns: 3
+  max_tokens: 1500

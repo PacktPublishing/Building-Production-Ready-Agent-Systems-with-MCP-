@@ -1,0 +1,339 @@
+{
+  "users": [
+    {
+      "id": "usr_001",
+      "name": "Alice",
+      "email": "alice@madeuptasks.dev",
+      "role": "admin",
+      "team_id": "team_engineering",
+      "avatar_url": "https://madeuptasks.dev/avatars/alice.png"
+    },
+    {
+      "id": "usr_002",
+      "name": "Bob",
+      "email": "bob@madeuptasks.dev",
+      "role": "developer",
+      "team_id": "team_engineering",
+      "avatar_url": "https://madeuptasks.dev/avatars/bob.png"
+    },
+    {
+      "id": "usr_003",
+      "name": "Carol",
+      "email": "carol@madeuptasks.dev",
+      "role": "designer",
+      "team_id": "team_design",
+      "avatar_url": "https://madeuptasks.dev/avatars/carol.png"
+    },
+    {
+      "id": "usr_004",
+      "name": "Dave",
+      "email": "dave@madeuptasks.dev",
+      "role": "qa",
+      "team_id": "team_engineering",
+      "avatar_url": "https://madeuptasks.dev/avatars/dave.png"
+    },
+    {
+      "id": "usr_005",
+      "name": "Eve",
+      "email": "eve@madeuptasks.dev",
+      "role": "viewer",
+      "team_id": "team_management",
+      "avatar_url": "https://madeuptasks.dev/avatars/eve.png"
+    }
+  ],
+  "projects": [
+    {
+      "id": "prj_001",
+      "name": "Website Redesign",
+      "description": "Complete overhaul of the corporate website with new branding, improved UX, and mobile-first responsive design.",
+      "status": "active",
+      "owner_id": "usr_001",
+      "default_task_template": "standard",
+      "_audit_created_by": "system_migration",
+      "_audit_modified_at": "2026-03-20T09:00:00Z",
+      "_internal_cost_center": "CC-2940-WEB",
+      "created_at": "2026-01-15T10:00:00Z",
+      "updated_at": "2026-03-20T09:00:00Z"
+    },
+    {
+      "id": "prj_002",
+      "name": "Q2 Marketing Campaign",
+      "description": "Multi-channel marketing campaign for Q2 product launch including social media, email sequences, and landing pages.",
+      "status": "active",
+      "owner_id": "usr_001",
+      "default_task_template": "marketing",
+      "_audit_created_by": "system_migration",
+      "_audit_modified_at": "2026-03-18T14:30:00Z",
+      "_internal_cost_center": "CC-3100-MKT",
+      "created_at": "2026-02-01T09:00:00Z",
+      "updated_at": "2026-03-18T14:30:00Z"
+    },
+    {
+      "id": "prj_003",
+      "name": "Legacy Migration",
+      "description": "Migration of legacy monolith services to microservices architecture on Kubernetes.",
+      "status": "archived",
+      "owner_id": "usr_002",
+      "default_task_template": "engineering",
+      "_audit_created_by": "system_migration",
+      "_audit_modified_at": "2026-03-01T16:00:00Z",
+      "_internal_cost_center": "CC-2940-INF",
+      "created_at": "2025-09-01T08:00:00Z",
+      "updated_at": "2026-03-01T16:00:00Z"
+    }
+  ],
+  "project_members": [
+    {"project_id": "prj_001", "user_id": "usr_001", "role": "owner"},
+    {"project_id": "prj_001", "user_id": "usr_002", "role": "member"},
+    {"project_id": "prj_001", "user_id": "usr_003", "role": "member"},
+    {"project_id": "prj_001", "user_id": "usr_004", "role": "member"},
+    {"project_id": "prj_001", "user_id": "usr_005", "role": "viewer"},
+    {"project_id": "prj_002", "user_id": "usr_001", "role": "owner"},
+    {"project_id": "prj_002", "user_id": "usr_003", "role": "member"},
+    {"project_id": "prj_002", "user_id": "usr_005", "role": "viewer"},
+    {"project_id": "prj_003", "user_id": "usr_002", "role": "owner"},
+    {"project_id": "prj_003", "user_id": "usr_001", "role": "member"},
+    {"project_id": "prj_003", "user_id": "usr_004", "role": "member"}
+  ],
+  "tasks": [
+    {
+      "id": "tsk_001", "title": "Design new homepage layout", "description": "Create wireframes and high-fidelity mockups for the new homepage following the updated brand guidelines.", "status": "done", "priority": "high", "assignee_id": "usr_003", "project_id": "prj_001", "due_date": "2026-02-15", "labels": ["design", "homepage"],
+      "created_at": "2026-01-16T10:00:00Z", "updated_at": "2026-02-14T16:00:00Z",
+      "estimated_hours": 40, "actual_hours": 38, "story_points": 8, "sprint_id": "spr_001", "epic_id": "epic_web_redesign", "environment": null, "browser": null, "os": null, "resolution": "completed", "votes": 3, "watchers": ["usr_001", "usr_002"], "source": "manual", "external_ref": null,
+      "_webhook_config": {"url": "https://hooks.madeuptasks.dev/tasks", "events": ["status_change"]}, "_internal_tracking_id": "TRK-90001", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-01-16T10:00:00Z"}, {"action": "status_change", "by": "usr_003", "at": "2026-02-14T16:00:00Z", "from": "in-review", "to": "done"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-WEB", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {"team_review": true}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 38, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_002", "title": "Implement responsive navigation", "description": "Build the responsive navigation component with hamburger menu for mobile and mega-menu for desktop.", "status": "in_progress", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_001", "due_date": "2026-03-28", "labels": ["frontend", "navigation"],
+      "created_at": "2026-01-20T09:00:00Z", "updated_at": "2026-03-22T11:00:00Z",
+      "estimated_hours": 24, "actual_hours": 16, "story_points": 5, "sprint_id": "spr_003", "epic_id": "epic_web_redesign", "environment": "staging", "browser": "all", "os": null, "resolution": null, "votes": 2, "watchers": ["usr_001", "usr_003"], "source": "manual", "external_ref": null,
+      "_webhook_config": {"url": "https://hooks.madeuptasks.dev/tasks", "events": ["status_change"]}, "_internal_tracking_id": "TRK-90002", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-01-20T09:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-WEB", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": ["tsk_001"], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 16, "remaining": 8}, "_risk_score": 0.3, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_003", "title": "Set up CI/CD pipeline for frontend", "description": "Configure GitHub Actions for automated testing, linting, and deployment of the frontend application.", "status": "open", "priority": "medium", "assignee_id": "usr_002", "project_id": "prj_001", "due_date": "2026-04-01", "labels": ["devops", "ci-cd"],
+      "created_at": "2026-01-25T14:00:00Z", "updated_at": "2026-01-25T14:00:00Z",
+      "estimated_hours": 16, "actual_hours": 0, "story_points": 3, "sprint_id": "spr_003", "epic_id": "epic_web_redesign", "environment": null, "browser": null, "os": null, "resolution": null, "votes": 1, "watchers": ["usr_001"], "source": "manual", "external_ref": null,
+      "_webhook_config": {"url": "https://hooks.madeuptasks.dev/tasks", "events": ["status_change"]}, "_internal_tracking_id": "TRK-90003", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-01-25T14:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-WEB", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 0, "remaining": 16}, "_risk_score": 0.2, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_004", "title": "Fix authentication bug on login page", "description": "Users are intermittently getting 403 errors when logging in with SSO. Appears to be a race condition in the token refresh flow.", "status": "blocked", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_001", "due_date": "2026-03-25", "labels": ["bug", "auth", "critical"],
+      "created_at": "2026-03-10T08:00:00Z", "updated_at": "2026-03-20T10:00:00Z",
+      "estimated_hours": 8, "actual_hours": 4, "story_points": 3, "sprint_id": "spr_003", "epic_id": "epic_web_redesign", "environment": "production", "browser": "chrome", "os": "all", "resolution": null, "votes": 5, "watchers": ["usr_001", "usr_004", "usr_005"], "source": "support_ticket", "external_ref": "SUP-4421",
+      "_webhook_config": {"url": "https://hooks.madeuptasks.dev/tasks", "events": ["status_change", "comment"]}, "_internal_tracking_id": "TRK-90004", "_audit_trail": [{"action": "created", "by": "usr_004", "at": "2026-03-10T08:00:00Z"}, {"action": "status_change", "by": "usr_002", "at": "2026-03-20T10:00:00Z", "from": "in_progress", "to": "blocked"}], "_sla_tier": "critical", "_cost_allocation": "CC-2940-WEB", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": ["tsk_007"], "_custom_fields": {"incident_id": "INC-882"}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 4, "remaining": 4}, "_risk_score": 0.8, "_compliance_tags": ["security"], "_data_classification": "confidential"
+    },
+    {
+      "id": "tsk_005", "title": "Create product listing page", "description": "Build the product listing page with filtering, sorting, and pagination. Must support grid and list view modes.", "status": "in-review", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_001", "due_date": "2026-03-26", "labels": ["frontend", "products"],
+      "created_at": "2026-02-01T10:00:00Z", "updated_at": "2026-03-21T15:00:00Z",
+      "estimated_hours": 32, "actual_hours": 30, "story_points": 8, "sprint_id": "spr_003", "epic_id": "epic_web_redesign", "environment": "staging", "browser": "all", "os": null, "resolution": null, "votes": 4, "watchers": ["usr_001", "usr_003", "usr_004"], "source": "manual", "external_ref": null,
+      "_webhook_config": {"url": "https://hooks.madeuptasks.dev/tasks", "events": ["status_change"]}, "_internal_tracking_id": "TRK-90005", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-02-01T10:00:00Z"}, {"action": "status_change", "by": "usr_002", "at": "2026-03-21T15:00:00Z", "from": "in_progress", "to": "in-review"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-WEB", "_parent_task_id": null, "_subtask_ids": ["tsk_005a", "tsk_005b"], "_dependency_ids": ["tsk_001"], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {"design_approved": true, "accessibility_checked": false}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 30, "remaining": 2}, "_risk_score": 0.4, "_compliance_tags": ["accessibility"], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_006", "title": "Write unit tests for auth module", "description": "Comprehensive test coverage for the authentication module including SSO, token refresh, and session management.", "status": "open", "priority": "medium", "assignee_id": "usr_004", "project_id": "prj_001", "due_date": "2026-04-05", "labels": ["testing", "auth"],
+      "created_at": "2026-03-11T09:00:00Z", "updated_at": "2026-03-11T09:00:00Z",
+      "estimated_hours": 16, "actual_hours": 0, "story_points": 3, "sprint_id": "spr_004", "epic_id": "epic_web_redesign", "environment": null, "browser": null, "os": null, "resolution": null, "votes": 1, "watchers": ["usr_002"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90006", "_audit_trail": [{"action": "created", "by": "usr_004", "at": "2026-03-11T09:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-WEB", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": ["tsk_004"], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 0, "remaining": 16}, "_risk_score": 0.2, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_007", "title": "Update footer with new legal links", "description": "Add updated privacy policy, terms of service, and cookie consent links to the site footer.", "status": "blocked", "priority": "low", "assignee_id": "usr_003", "project_id": "prj_001", "due_date": "2026-04-10", "labels": ["design", "legal"],
+      "created_at": "2026-03-05T11:00:00Z", "updated_at": "2026-03-20T11:00:00Z",
+      "estimated_hours": 4, "actual_hours": 0, "story_points": 1, "sprint_id": "spr_004", "epic_id": "epic_web_redesign", "environment": null, "browser": null, "os": null, "resolution": null, "votes": 0, "watchers": [], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90007", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-03-05T11:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-WEB", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": ["tsk_004"], "_blocked_by_ids": ["tsk_004"], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": false, "slack": false}, "_time_tracking": {"logged": 0, "remaining": 4}, "_risk_score": 0.1, "_compliance_tags": ["legal"], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_008", "title": "Optimize image loading performance", "description": "Implement lazy loading, WebP conversion, and responsive image sizes to improve page load times.", "status": "in_progress", "priority": "medium", "assignee_id": "usr_002", "project_id": "prj_001", "due_date": "2026-04-01", "labels": ["performance", "frontend"],
+      "created_at": "2026-02-20T10:00:00Z", "updated_at": "2026-03-22T09:00:00Z",
+      "estimated_hours": 16, "actual_hours": 8, "story_points": 5, "sprint_id": "spr_003", "epic_id": "epic_web_redesign", "environment": "staging", "browser": "all", "os": null, "resolution": null, "votes": 2, "watchers": ["usr_001"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90008", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-02-20T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-WEB", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 8, "remaining": 8}, "_risk_score": 0.3, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_009", "title": "Accessibility audit and fixes", "description": "Run WCAG 2.1 AA compliance audit and fix all critical and major issues found.", "status": "open", "priority": "high", "assignee_id": "usr_004", "project_id": "prj_001", "due_date": "2026-04-15", "labels": ["accessibility", "compliance"],
+      "created_at": "2026-03-01T10:00:00Z", "updated_at": "2026-03-01T10:00:00Z",
+      "estimated_hours": 24, "actual_hours": 0, "story_points": 5, "sprint_id": "spr_004", "epic_id": "epic_web_redesign", "environment": null, "browser": null, "os": null, "resolution": null, "votes": 3, "watchers": ["usr_001", "usr_003"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90009", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-03-01T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-WEB", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": ["tsk_005"], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 0, "remaining": 24}, "_risk_score": 0.5, "_compliance_tags": ["accessibility", "wcag"], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_010", "title": "Design contact form", "description": "Design and prototype the contact form with validation states, error messages, and success confirmation.", "status": "done", "priority": "medium", "assignee_id": "usr_003", "project_id": "prj_001", "due_date": "2026-03-01", "labels": ["design", "forms"],
+      "created_at": "2026-02-01T11:00:00Z", "updated_at": "2026-02-28T16:00:00Z",
+      "estimated_hours": 12, "actual_hours": 10, "story_points": 3, "sprint_id": "spr_002", "epic_id": "epic_web_redesign", "environment": null, "browser": null, "os": null, "resolution": "completed", "votes": 1, "watchers": ["usr_001"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90010", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-02-01T11:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-WEB", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 10, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_011", "title": "Implement contact form backend", "description": "Build the form submission API endpoint with validation, rate limiting, and email notification integration.", "status": "in_progress", "priority": "medium", "assignee_id": "usr_002", "project_id": "prj_001", "due_date": "2026-03-30", "labels": ["backend", "forms"],
+      "created_at": "2026-03-01T10:00:00Z", "updated_at": "2026-03-22T14:00:00Z",
+      "estimated_hours": 12, "actual_hours": 6, "story_points": 3, "sprint_id": "spr_003", "epic_id": "epic_web_redesign", "environment": "development", "browser": null, "os": null, "resolution": null, "votes": 0, "watchers": [], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90011", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-03-01T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-WEB", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": ["tsk_010"], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 6, "remaining": 6}, "_risk_score": 0.2, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_012", "title": "SEO meta tags and sitemap", "description": "Add proper meta tags, Open Graph data, structured data markup, and generate XML sitemap.", "status": "open", "priority": "low", "assignee_id": "usr_002", "project_id": "prj_001", "due_date": "2026-04-20", "labels": ["seo", "frontend"],
+      "created_at": "2026-03-05T10:00:00Z", "updated_at": "2026-03-05T10:00:00Z",
+      "estimated_hours": 8, "actual_hours": 0, "story_points": 2, "sprint_id": "spr_004", "epic_id": "epic_web_redesign", "environment": null, "browser": null, "os": null, "resolution": null, "votes": 1, "watchers": [], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90012", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-03-05T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-WEB", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": false, "slack": false}, "_time_tracking": {"logged": 0, "remaining": 8}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_013", "title": "Write email campaign copy", "description": "Draft copy for the 6-email drip campaign targeting existing customers about the Q2 product launch.", "status": "in_progress", "priority": "high", "assignee_id": "usr_003", "project_id": "prj_002", "due_date": "2026-03-28", "labels": ["copy", "email"],
+      "created_at": "2026-02-05T10:00:00Z", "updated_at": "2026-03-22T10:00:00Z",
+      "estimated_hours": 20, "actual_hours": 12, "story_points": 5, "sprint_id": null, "epic_id": "epic_q2_launch", "environment": null, "browser": null, "os": null, "resolution": null, "votes": 2, "watchers": ["usr_001"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90013", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-02-05T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-3100-MKT", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 12, "remaining": 8}, "_risk_score": 0.3, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_014", "title": "Design social media graphics", "description": "Create a set of 20 social media graphics for Instagram, Twitter, and LinkedIn promoting the Q2 launch.", "status": "in-review", "priority": "medium", "assignee_id": "usr_003", "project_id": "prj_002", "due_date": "2026-03-25", "labels": ["design", "social"],
+      "created_at": "2026-02-10T09:00:00Z", "updated_at": "2026-03-20T16:00:00Z",
+      "estimated_hours": 16, "actual_hours": 14, "story_points": 3, "sprint_id": null, "epic_id": "epic_q2_launch", "environment": null, "browser": null, "os": null, "resolution": null, "votes": 3, "watchers": ["usr_001", "usr_005"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90014", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-02-10T09:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-3100-MKT", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 14, "remaining": 2}, "_risk_score": 0.2, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_015", "title": "Set up landing page A/B test", "description": "Configure A/B testing for two landing page variants with different CTAs and hero images.", "status": "open", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_002", "due_date": "2026-04-01", "labels": ["testing", "landing-page"],
+      "created_at": "2026-03-01T10:00:00Z", "updated_at": "2026-03-01T10:00:00Z",
+      "estimated_hours": 8, "actual_hours": 0, "story_points": 2, "sprint_id": null, "epic_id": "epic_q2_launch", "environment": null, "browser": null, "os": null, "resolution": null, "votes": 1, "watchers": ["usr_001"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90015", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-03-01T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-3100-MKT", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 0, "remaining": 8}, "_risk_score": 0.3, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_016", "title": "Review analytics tracking setup", "description": "Verify all conversion events, UTM parameters, and goal tracking are properly configured for the campaign.", "status": "open", "priority": "medium", "assignee_id": "usr_004", "project_id": "prj_002", "due_date": "2026-04-05", "labels": ["analytics", "qa"],
+      "created_at": "2026-03-10T10:00:00Z", "updated_at": "2026-03-10T10:00:00Z",
+      "estimated_hours": 8, "actual_hours": 0, "story_points": 2, "sprint_id": null, "epic_id": "epic_q2_launch", "environment": null, "browser": null, "os": null, "resolution": null, "votes": 0, "watchers": [], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90016", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-03-10T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-3100-MKT", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 0, "remaining": 8}, "_risk_score": 0.2, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_017", "title": "Build landing page", "description": "Implement the campaign landing page based on approved designs with lead capture form.", "status": "in_progress", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_002", "due_date": "2026-03-30", "labels": ["frontend", "landing-page"],
+      "created_at": "2026-02-15T10:00:00Z", "updated_at": "2026-03-22T11:00:00Z",
+      "estimated_hours": 16, "actual_hours": 10, "story_points": 5, "sprint_id": null, "epic_id": "epic_q2_launch", "environment": "staging", "browser": null, "os": null, "resolution": null, "votes": 2, "watchers": ["usr_001", "usr_003"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90017", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-02-15T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-3100-MKT", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 10, "remaining": 6}, "_risk_score": 0.3, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_018", "title": "Coordinate influencer outreach", "description": "Identify and reach out to 10 industry influencers for potential product review or mention during Q2 launch.", "status": "done", "priority": "medium", "assignee_id": "usr_005", "project_id": "prj_002", "due_date": "2026-03-15", "labels": ["outreach", "influencer"],
+      "created_at": "2026-02-01T10:00:00Z", "updated_at": "2026-03-14T17:00:00Z",
+      "estimated_hours": 12, "actual_hours": 15, "story_points": 3, "sprint_id": null, "epic_id": "epic_q2_launch", "environment": null, "browser": null, "os": null, "resolution": "completed", "votes": 1, "watchers": ["usr_001"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90018", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-02-01T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-3100-MKT", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 15, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_019", "title": "Prepare press release", "description": "Write and get approval for the official press release announcing the Q2 product update.", "status": "in-review", "priority": "medium", "assignee_id": "usr_005", "project_id": "prj_002", "due_date": "2026-03-28", "labels": ["pr", "copy"],
+      "created_at": "2026-03-05T10:00:00Z", "updated_at": "2026-03-21T10:00:00Z",
+      "estimated_hours": 8, "actual_hours": 6, "story_points": 2, "sprint_id": null, "epic_id": "epic_q2_launch", "environment": null, "browser": null, "os": null, "resolution": null, "votes": 1, "watchers": ["usr_001"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90019", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-03-05T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-3100-MKT", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 6, "remaining": 2}, "_risk_score": 0.2, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_020", "title": "Budget reconciliation for Q1 spend", "description": "Reconcile actual Q1 marketing spend against budget and prepare variance report for finance.", "status": "done", "priority": "low", "assignee_id": "usr_005", "project_id": "prj_002", "due_date": "2026-03-10", "labels": ["finance", "reporting"],
+      "created_at": "2026-03-01T10:00:00Z", "updated_at": "2026-03-09T16:00:00Z",
+      "estimated_hours": 4, "actual_hours": 3, "story_points": 1, "sprint_id": null, "epic_id": null, "environment": null, "browser": null, "os": null, "resolution": "completed", "votes": 0, "watchers": [], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90020", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-03-01T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-3100-MKT", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": false, "slack": false}, "_time_tracking": {"logged": 3, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_021", "title": "Decompose user service", "description": "Extract user management from the monolith into a standalone microservice with its own database.", "status": "done", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_003", "due_date": "2025-11-01", "labels": ["microservices", "user-service"],
+      "created_at": "2025-09-05T10:00:00Z", "updated_at": "2025-10-30T16:00:00Z",
+      "estimated_hours": 80, "actual_hours": 72, "story_points": 13, "sprint_id": "spr_legacy_001", "epic_id": "epic_migration", "environment": "production", "browser": null, "os": null, "resolution": "completed", "votes": 5, "watchers": ["usr_001", "usr_004"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90021", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2025-09-05T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 72, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_022", "title": "Decompose payment service", "description": "Extract payment processing into a standalone microservice with PCI DSS compliance.", "status": "done", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_003", "due_date": "2025-12-15", "labels": ["microservices", "payments"],
+      "created_at": "2025-10-01T10:00:00Z", "updated_at": "2025-12-12T16:00:00Z",
+      "estimated_hours": 120, "actual_hours": 110, "story_points": 21, "sprint_id": "spr_legacy_002", "epic_id": "epic_migration", "environment": "production", "browser": null, "os": null, "resolution": "completed", "votes": 4, "watchers": ["usr_001", "usr_004"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90022", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2025-10-01T10:00:00Z"}], "_sla_tier": "critical", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": ["tsk_021"], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 110, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": ["pci-dss"], "_data_classification": "confidential"
+    },
+    {
+      "id": "tsk_023", "title": "Set up Kubernetes cluster", "description": "Provision and configure the production Kubernetes cluster with proper networking, RBAC, and monitoring.", "status": "done", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_003", "due_date": "2025-10-15", "labels": ["infrastructure", "kubernetes"],
+      "created_at": "2025-09-10T10:00:00Z", "updated_at": "2025-10-14T16:00:00Z",
+      "estimated_hours": 40, "actual_hours": 35, "story_points": 8, "sprint_id": "spr_legacy_001", "epic_id": "epic_migration", "environment": "production", "browser": null, "os": null, "resolution": "completed", "votes": 3, "watchers": ["usr_001"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90023", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2025-09-10T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 35, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_024", "title": "Implement service mesh", "description": "Deploy Istio service mesh for inter-service communication, mTLS, and traffic management.", "status": "done", "priority": "medium", "assignee_id": "usr_002", "project_id": "prj_003", "due_date": "2026-01-15", "labels": ["infrastructure", "service-mesh"],
+      "created_at": "2025-11-01T10:00:00Z", "updated_at": "2026-01-14T16:00:00Z",
+      "estimated_hours": 40, "actual_hours": 45, "story_points": 8, "sprint_id": "spr_legacy_003", "epic_id": "epic_migration", "environment": "production", "browser": null, "os": null, "resolution": "completed", "votes": 2, "watchers": ["usr_001", "usr_004"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90024", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2025-11-01T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": ["tsk_023"], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 45, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_025", "title": "Migrate notification service", "description": "Extract notification handling (email, push, SMS) from monolith into a dedicated microservice.", "status": "done", "priority": "medium", "assignee_id": "usr_004", "project_id": "prj_003", "due_date": "2026-01-30", "labels": ["microservices", "notifications"],
+      "created_at": "2025-12-01T10:00:00Z", "updated_at": "2026-01-28T16:00:00Z",
+      "estimated_hours": 60, "actual_hours": 55, "story_points": 8, "sprint_id": "spr_legacy_004", "epic_id": "epic_migration", "environment": "production", "browser": null, "os": null, "resolution": "completed", "votes": 1, "watchers": ["usr_002"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90025", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2025-12-01T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 55, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_026", "title": "Database migration tooling", "description": "Build automated database migration scripts and rollback procedures for each service extraction.", "status": "done", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_003", "due_date": "2025-10-01", "labels": ["database", "tooling"],
+      "created_at": "2025-09-05T10:00:00Z", "updated_at": "2025-09-30T16:00:00Z",
+      "estimated_hours": 30, "actual_hours": 28, "story_points": 5, "sprint_id": "spr_legacy_001", "epic_id": "epic_migration", "environment": null, "browser": null, "os": null, "resolution": "completed", "votes": 2, "watchers": ["usr_001"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90026", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2025-09-05T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 28, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_027", "title": "API gateway configuration", "description": "Configure API gateway routing rules, rate limiting, and authentication for all microservices.", "status": "done", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_003", "due_date": "2025-11-15", "labels": ["infrastructure", "api-gateway"],
+      "created_at": "2025-10-15T10:00:00Z", "updated_at": "2025-11-14T16:00:00Z",
+      "estimated_hours": 24, "actual_hours": 20, "story_points": 5, "sprint_id": "spr_legacy_002", "epic_id": "epic_migration", "environment": "production", "browser": null, "os": null, "resolution": "completed", "votes": 2, "watchers": ["usr_001"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90027", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2025-10-15T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": ["tsk_023"], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 20, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_028", "title": "Load testing and capacity planning", "description": "Run load tests against the new microservices architecture and document capacity requirements.", "status": "done", "priority": "medium", "assignee_id": "usr_004", "project_id": "prj_003", "due_date": "2026-02-01", "labels": ["testing", "performance"],
+      "created_at": "2026-01-15T10:00:00Z", "updated_at": "2026-01-31T16:00:00Z",
+      "estimated_hours": 20, "actual_hours": 18, "story_points": 5, "sprint_id": "spr_legacy_005", "epic_id": "epic_migration", "environment": "staging", "browser": null, "os": null, "resolution": "completed", "votes": 1, "watchers": ["usr_002"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90028", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2026-01-15T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 18, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_029", "title": "Migrate reporting service", "description": "Extract reporting and analytics from the monolith. Includes dashboard API and scheduled report generation.", "status": "done", "priority": "medium", "assignee_id": "usr_004", "project_id": "prj_003", "due_date": "2026-02-15", "labels": ["microservices", "reporting"],
+      "created_at": "2026-01-01T10:00:00Z", "updated_at": "2026-02-14T16:00:00Z",
+      "estimated_hours": 50, "actual_hours": 48, "story_points": 8, "sprint_id": "spr_legacy_005", "epic_id": "epic_migration", "environment": "production", "browser": null, "os": null, "resolution": "completed", "votes": 1, "watchers": ["usr_002"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90029", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2026-01-01T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 48, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_030", "title": "Decommission monolith auth module", "description": "Remove the authentication module from the monolith after verifying all services use the new auth service.", "status": "done", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_003", "due_date": "2026-02-28", "labels": ["decommission", "auth"],
+      "created_at": "2026-02-01T10:00:00Z", "updated_at": "2026-02-27T16:00:00Z",
+      "estimated_hours": 16, "actual_hours": 12, "story_points": 3, "sprint_id": "spr_legacy_006", "epic_id": "epic_migration", "environment": "production", "browser": null, "os": null, "resolution": "completed", "votes": 2, "watchers": ["usr_001", "usr_004"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90030", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2026-02-01T10:00:00Z"}], "_sla_tier": "critical", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": ["tsk_021"], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 12, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": ["security"], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_031", "title": "Write migration runbook", "description": "Document step-by-step procedures for migrating remaining services, including rollback procedures.", "status": "done", "priority": "medium", "assignee_id": "usr_002", "project_id": "prj_003", "due_date": "2026-02-20", "labels": ["documentation"],
+      "created_at": "2026-02-05T10:00:00Z", "updated_at": "2026-02-19T16:00:00Z",
+      "estimated_hours": 12, "actual_hours": 10, "story_points": 3, "sprint_id": "spr_legacy_006", "epic_id": "epic_migration", "environment": null, "browser": null, "os": null, "resolution": "completed", "votes": 1, "watchers": ["usr_001"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90031", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2026-02-05T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 10, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_032", "title": "CI/CD pipeline for microservices", "description": "Set up individual CI/CD pipelines for each microservice with automated testing and deployment.", "status": "done", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_003", "due_date": "2025-11-30", "labels": ["devops", "ci-cd"],
+      "created_at": "2025-10-20T10:00:00Z", "updated_at": "2025-11-28T16:00:00Z",
+      "estimated_hours": 30, "actual_hours": 32, "story_points": 5, "sprint_id": "spr_legacy_002", "epic_id": "epic_migration", "environment": null, "browser": null, "os": null, "resolution": "completed", "votes": 2, "watchers": ["usr_001"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90032", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2025-10-20T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 32, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_033", "title": "Monitoring and alerting setup", "description": "Configure Prometheus, Grafana dashboards, and PagerDuty alerting for all microservices.", "status": "done", "priority": "high", "assignee_id": "usr_004", "project_id": "prj_003", "due_date": "2026-01-01", "labels": ["monitoring", "infrastructure"],
+      "created_at": "2025-11-15T10:00:00Z", "updated_at": "2025-12-30T16:00:00Z",
+      "estimated_hours": 30, "actual_hours": 28, "story_points": 5, "sprint_id": "spr_legacy_003", "epic_id": "epic_migration", "environment": "production", "browser": null, "os": null, "resolution": "completed", "votes": 2, "watchers": ["usr_002"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90033", "_audit_trail": [{"action": "created", "by": "usr_002", "at": "2025-11-15T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 28, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    },
+    {
+      "id": "tsk_034", "title": "Security audit of new architecture", "description": "Conduct comprehensive security audit of the microservices architecture including penetration testing.", "status": "done", "priority": "high", "assignee_id": "usr_004", "project_id": "prj_003", "due_date": "2026-02-28", "labels": ["security", "audit"],
+      "created_at": "2026-02-01T10:00:00Z", "updated_at": "2026-02-27T16:00:00Z",
+      "estimated_hours": 40, "actual_hours": 38, "story_points": 8, "sprint_id": "spr_legacy_006", "epic_id": "epic_migration", "environment": "production", "browser": null, "os": null, "resolution": "completed", "votes": 3, "watchers": ["usr_001", "usr_002"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90034", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-02-01T10:00:00Z"}], "_sla_tier": "critical", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": true}, "_time_tracking": {"logged": 38, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": ["security", "compliance"], "_data_classification": "confidential"
+    },
+    {
+      "id": "tsk_035", "title": "Final monolith decommission plan", "description": "Create the final plan for shutting down the monolith once all services are fully migrated and verified.", "status": "done", "priority": "medium", "assignee_id": "usr_001", "project_id": "prj_003", "due_date": "2026-03-01", "labels": ["planning", "decommission"],
+      "created_at": "2026-02-15T10:00:00Z", "updated_at": "2026-02-28T16:00:00Z",
+      "estimated_hours": 8, "actual_hours": 6, "story_points": 2, "sprint_id": "spr_legacy_006", "epic_id": "epic_migration", "environment": null, "browser": null, "os": null, "resolution": "completed", "votes": 3, "watchers": ["usr_002", "usr_004"], "source": "manual", "external_ref": null,
+      "_webhook_config": null, "_internal_tracking_id": "TRK-90035", "_audit_trail": [{"action": "created", "by": "usr_001", "at": "2026-02-15T10:00:00Z"}], "_sla_tier": "standard", "_cost_allocation": "CC-2940-INF", "_parent_task_id": null, "_subtask_ids": [], "_dependency_ids": [], "_blocked_by_ids": [], "_blocking_ids": [], "_custom_fields": {}, "_notification_prefs": {"email": true, "slack": false}, "_time_tracking": {"logged": 6, "remaining": 0}, "_risk_score": 0.1, "_compliance_tags": [], "_data_classification": "internal"
+    }
+  ],
+  "comments": [
+    {"id": "cmt_001", "task_id": "tsk_004", "author_id": "usr_004", "body": "Reproduced this consistently on Chrome 122. The 403 happens when the access token expires mid-session and the refresh token request races with the page reload. Stack trace attached.", "parent_comment_id": null, "created_at": "2026-03-10T08:30:00Z"},
+    {"id": "cmt_002", "task_id": "tsk_004", "author_id": "usr_002", "body": "Thanks Dave. I can see the race condition. The token refresh interceptor isn't queuing concurrent requests — each one fires its own refresh. Need to add a mutex or queue pattern.", "parent_comment_id": "cmt_001", "created_at": "2026-03-10T10:15:00Z"},
+    {"id": "cmt_003", "task_id": "tsk_004", "author_id": "usr_001", "body": "This is blocking the QA signoff on the login flow. Can we prioritize this for the current sprint?", "parent_comment_id": null, "created_at": "2026-03-11T09:00:00Z"},
+    {"id": "cmt_004", "task_id": "tsk_004", "author_id": "usr_002", "body": "Blocked on getting access to the SSO sandbox environment. IT ticket submitted but no response yet. Escalating.", "parent_comment_id": null, "created_at": "2026-03-20T10:00:00Z"},
+    {"id": "cmt_005", "task_id": "tsk_005", "author_id": "usr_002", "body": "PR is up for review. Grid view works well. List view has a minor alignment issue on mobile that I'll fix in a follow-up.", "parent_comment_id": null, "created_at": "2026-03-21T15:00:00Z"},
+    {"id": "cmt_006", "task_id": "tsk_005", "author_id": "usr_003", "body": "Reviewed the designs against implementation. Looks great! The card hover states are smooth. One note: the filter dropdown needs a bit more padding on the left.", "parent_comment_id": null, "created_at": "2026-03-22T09:00:00Z"},
+    {"id": "cmt_007", "task_id": "tsk_005", "author_id": "usr_004", "body": "QA pass: all filter combinations work correctly. Sorting is stable. Pagination loads smoothly. Approving from QA side.", "parent_comment_id": null, "created_at": "2026-03-22T14:00:00Z"},
+    {"id": "cmt_008", "task_id": "tsk_002", "author_id": "usr_002", "body": "Desktop mega-menu is done. Starting on the mobile hamburger menu. Considering using a slide-out panel instead of dropdown for better UX on small screens.", "parent_comment_id": null, "created_at": "2026-03-22T11:00:00Z"},
+    {"id": "cmt_009", "task_id": "tsk_002", "author_id": "usr_003", "body": "Slide-out panel sounds good! Make sure it has a smooth 300ms ease-in-out transition. I can provide updated specs if needed.", "parent_comment_id": "cmt_008", "created_at": "2026-03-22T11:30:00Z"},
+    {"id": "cmt_010", "task_id": "tsk_013", "author_id": "usr_003", "body": "First three emails drafted and sent to Alice for review. Working on the remaining three this week.", "parent_comment_id": null, "created_at": "2026-03-18T14:00:00Z"},
+    {"id": "cmt_011", "task_id": "tsk_013", "author_id": "usr_001", "body": "Emails 1-3 look good. Minor suggestion: make the CTA in email 2 more action-oriented. 'Start your free trial' instead of 'Learn more'.", "parent_comment_id": "cmt_010", "created_at": "2026-03-19T10:00:00Z"},
+    {"id": "cmt_012", "task_id": "tsk_014", "author_id": "usr_003", "body": "All 20 graphics done. Instagram and Twitter sets uploaded to the shared drive. LinkedIn set needs final approval on the banner dimensions.", "parent_comment_id": null, "created_at": "2026-03-20T16:00:00Z"},
+    {"id": "cmt_013", "task_id": "tsk_017", "author_id": "usr_002", "body": "Landing page skeleton is up on staging. Lead capture form integrates with our email service. Need Carol to review the visual polish.", "parent_comment_id": null, "created_at": "2026-03-22T11:00:00Z"},
+    {"id": "cmt_014", "task_id": "tsk_019", "author_id": "usr_005", "body": "Draft press release submitted. Waiting on legal review for the product claims section before we can finalize.", "parent_comment_id": null, "created_at": "2026-03-21T10:00:00Z"},
+    {"id": "cmt_015", "task_id": "tsk_008", "author_id": "usr_002", "body": "Lazy loading implemented with IntersectionObserver. WebP conversion pipeline set up. Initial tests show 40% reduction in page weight.", "parent_comment_id": null, "created_at": "2026-03-22T09:00:00Z"},
+    {"id": "cmt_016", "task_id": "tsk_011", "author_id": "usr_002", "body": "Rate limiting middleware is in place. Email notification uses our existing service. Just need to add honeypot field for spam prevention.", "parent_comment_id": null, "created_at": "2026-03-22T14:00:00Z"},
+    {"id": "cmt_017", "task_id": "tsk_009", "author_id": "usr_001", "body": "We need to hit WCAG 2.1 AA before launch. Dave, can you coordinate with Carol on the color contrast issues we flagged last review?", "parent_comment_id": null, "created_at": "2026-03-15T10:00:00Z"},
+    {"id": "cmt_018", "task_id": "tsk_001", "author_id": "usr_003", "body": "Final mockups approved by the stakeholder committee. All assets exported and handed off to Bob for implementation.", "parent_comment_id": null, "created_at": "2026-02-14T16:00:00Z"},
+    {"id": "cmt_019", "task_id": "tsk_007", "author_id": "usr_003", "body": "Waiting on tsk_004 to be resolved before I can test the footer links in the authenticated view. Legal has sent the updated URLs.", "parent_comment_id": null, "created_at": "2026-03-20T11:00:00Z"},
+    {"id": "cmt_020", "task_id": "tsk_015", "author_id": "usr_001", "body": "Let's use Optimizely for this. Bob, check if our current plan supports the number of variants we need.", "parent_comment_id": null, "created_at": "2026-03-10T11:00:00Z"}
+  ],
+  "attachments": [
+    {"id": "att_001", "task_id": "tsk_001", "filename": "homepage-wireframe-v3.fig", "size": 2048576, "mime_type": "application/x-fig", "uploaded_by": "usr_003", "upload_date": "2026-01-20T10:00:00Z"},
+    {"id": "att_002", "task_id": "tsk_001", "filename": "homepage-final-mockup.png", "size": 1524288, "mime_type": "image/png", "uploaded_by": "usr_003", "upload_date": "2026-02-10T14:00:00Z"},
+    {"id": "att_003", "task_id": "tsk_004", "filename": "403-error-screenshot.png", "size": 245760, "mime_type": "image/png", "uploaded_by": "usr_004", "upload_date": "2026-03-10T08:30:00Z"},
+    {"id": "att_004", "task_id": "tsk_004", "filename": "token-refresh-trace.log", "size": 102400, "mime_type": "text/plain", "uploaded_by": "usr_004", "upload_date": "2026-03-10T08:35:00Z"},
+    {"id": "att_005", "task_id": "tsk_014", "filename": "social-graphics-bundle.zip", "size": 15728640, "mime_type": "application/zip", "uploaded_by": "usr_003", "upload_date": "2026-03-20T16:00:00Z"}
+  ]
+}

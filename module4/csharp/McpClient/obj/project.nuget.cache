@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "dgSpecHash": "elGtQBjUjm0=",
+  "success": true,
+  "projectFilePath": "/home/phd/repos/mcp_agent_workshop/module4/csharp/McpClient/McpClient.csproj",
+  "expectedPackageFiles": [
+    "/home/phd/.nuget/packages/microsoft.extensions.ai.abstractions/10.3.0/microsoft.extensions.ai.abstractions.10.3.0.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.caching.abstractions/10.0.3/microsoft.extensions.caching.abstractions.10.0.3.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.configuration/9.0.14/microsoft.extensions.configuration.9.0.14.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.configuration.abstractions/10.0.3/microsoft.extensions.configuration.abstractions.10.0.3.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.configuration.binder/9.0.14/microsoft.extensions.configuration.binder.9.0.14.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.dependencyinjection/9.0.14/microsoft.extensions.dependencyinjection.9.0.14.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.3/microsoft.extensions.dependencyinjection.abstractions.10.0.3.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.diagnostics.abstractions/10.0.3/microsoft.extensions.diagnostics.abstractions.10.0.3.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.fileproviders.abstractions/10.0.3/microsoft.extensions.fileproviders.abstractions.10.0.3.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.hosting.abstractions/10.0.3/microsoft.extensions.hosting.abstractions.10.0.3.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.logging/9.0.14/microsoft.extensions.logging.9.0.14.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.logging.abstractions/10.0.3/microsoft.extensions.logging.abstractions.10.0.3.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.logging.configuration/9.0.14/microsoft.extensions.logging.configuration.9.0.14.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.logging.console/9.0.14/microsoft.extensions.logging.console.9.0.14.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.options/10.0.3/microsoft.extensions.options.10.0.3.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.options.configurationextensions/9.0.14/microsoft.extensions.options.configurationextensions.9.0.14.nupkg.sha512",
+    "/home/phd/.nuget/packages/microsoft.extensions.primitives/10.0.3/microsoft.extensions.primitives.10.0.3.nupkg.sha512",
+    "/home/phd/.nuget/packages/modelcontextprotocol/1.0.0/modelcontextprotocol.1.0.0.nupkg.sha512",
+    "/home/phd/.nuget/packages/modelcontextprotocol.core/1.0.0/modelcontextprotocol.core.1.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,6 @@
+agent-framework-core
+agent-framework-anthropic
+agent-framework-ollama
+agent-framework-devui
+python-dotenv
+mcp
