@@ -219,8 +219,8 @@
       "webOrigins": ["http://localhost:8000", "http://localhost:8001"],
       "protocol": "openid-connect",
       "fullScopeAllowed": false,
-      "defaultClientScopes": ["openid", "email", "profile"],
-      "optionalClientScopes": ["tasks:read", "tasks:admin"],
+      "defaultClientScopes": ["openid", "email", "profile", "tasks:read", "tasks:admin"],
+      "optionalClientScopes": [],
       "attributes": {
         "oidc.ciba.grant.enabled": "false",
         "oauth2.device.authorization.grant.enabled": "false",
