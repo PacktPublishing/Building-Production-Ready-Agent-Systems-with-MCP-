@@ -1,32 +1,23 @@
-"""Example: Agent with save-to-file middleware.
+"""Example: Agent with save-to-file middleware (OpenAI variant).
 
-Demonstrates the LargeResultSaverMiddleware by connecting to the baseline
-MCP server (which returns huge raw API responses) and showing how the
-middleware intercepts large results.
+Same as example_agent.py but uses OpenAI instead of Anthropic.
+Set OPENAI_API_KEY in your environment.
 
 Usage:
-    python example_agent.py
-
-Requires:
-    - MadeUpTasks API running on localhost:8090
-    - ANTHROPIC_API_KEY set in environment
+    python example_agent_openai.py
 """
 
 import os
+import subprocess
 import sys
 
-import subprocess
-
 from agent_framework import Agent, FunctionTool, MCPStdioTool
-from agent_framework.anthropic import AnthropicClient
+from agent_framework.openai import OpenAIChatClient
 from agent_framework.devui import serve
 from dotenv import load_dotenv
 
 from large_result_middleware import LargeResultSaverMiddleware
 
-
-# Tools for accessing saved results — the agent searches rather than
-# reading entire files, which is the whole point of the pattern.
 
 def _search_file(file_path: str, pattern: str, max_results: int = 20) -> str:
     """Search a saved result file for lines matching a pattern."""
@@ -83,8 +74,6 @@ read_file_section = FunctionTool(
 
 load_dotenv()
 
-# Use the baseline server — it returns unfiltered 40+ field responses,
-# which makes the middleware's effect very visible.
 baseline_mcp = MCPStdioTool(
     name="madeuptasks-baseline",
     command=sys.executable,
@@ -96,31 +85,29 @@ baseline_mcp = MCPStdioTool(
     approval_mode="never_require",
 )
 
-client = AnthropicClient(model_id="claude-sonnet-4-6")
+# Only change: OpenAIChatClient instead of AnthropicClient
+client = OpenAIChatClient(model_id="gpt-5.4-mini")
 
-# Create agent WITH the middleware — large results get saved to files
 agent_with_middleware = Agent(
     client=client,
     name="WithSaveToFile",
     description="Baseline agent with save-to-file middleware",
     instructions=(
         "You are a helpful assistant for MadeUpTasks project management. "
-        "When tool results are saved to files, use the read_file tool to "
-        "retrieve the specific information you need rather than asking the "
-        "user to look at the file. Read selectively — don't read the entire "
-        "file if you only need a few fields."
+        "When tool results are saved to files, use the search_file and "
+        "read_file_section tools to retrieve the specific information you "
+        "need. Search selectively — don't read entire files."
     ),
     tools=[baseline_mcp, search_file, read_file_section],
     middleware=[
         LargeResultSaverMiddleware(
-            token_threshold=500,  # Save results over ~500 tokens
+            token_threshold=500,
             output_dir=".tool_results",
             preview_chars=400,
         ),
     ],
 )
 
-# For comparison: same agent WITHOUT the middleware
 agent_without_middleware = Agent(
     client=client,
     name="WithoutSaveToFile",
@@ -130,5 +117,4 @@ agent_without_middleware = Agent(
 )
 
 if __name__ == "__main__":
-    # Serve both agents so participants can compare in the DevUI
     serve(entities=[agent_with_middleware, agent_without_middleware], port=8086, auto_open=True, instrumentation_enabled=True)

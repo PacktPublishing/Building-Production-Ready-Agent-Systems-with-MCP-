@@ -137,14 +137,9 @@ async def validate_token(credentials: HTTPAuthorizationCredentials = Depends(sec
             issuer=ISSUER_URL,
             options={"verify_aud": True, "verify_iss": True},
         )
-        azp = payload.get("azp", "unknown")
-        act = payload.get("act", {})
-        actor_sub = act.get("sub", "none") if act else "none"
         logger.info(
-            "Token validated: user=%s  azp=%s  actor=%s  scopes=%s",
+            "Token validated: user=%s  scopes=%s",
             payload.get("preferred_username", "unknown"),
-            azp,
-            actor_sub,
             payload.get("scope", ""),
         )
         return payload

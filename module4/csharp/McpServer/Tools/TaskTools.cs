@@ -1,5 +1,6 @@
 using ModelContextProtocol;
 using ModelContextProtocol.Server;
+using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -90,6 +91,7 @@ public sealed class TaskTools
     }
 
     [McpServerTool, Description("Create a new task in the project. Requires tasks:admin scope.")]
+//    [Authorize(Roles = "tasks:admin")]
     public async Task<string> CreateTask(
         [Description("The task title")] string title,
         [Description("Who the task is assigned to (optional)")] string? assignee = null,
@@ -104,6 +106,7 @@ public sealed class TaskTools
     }
 
     [McpServerTool, Description("Close a completed task. Requires tasks:admin scope.")]
+//    [Authorize(Roles = "tasks:admin")]
     public async Task<string> CloseTask(
         [Description("The task identifier to close (e.g. TASK-003)")] string taskId)
     {

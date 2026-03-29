@@ -65,6 +65,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddMcpServer()
     .WithTools<TaskTools>()
     .WithHttpTransport();
+//    .AddAuthorizationFilters();
 
 // HttpClient for the downstream project-api
 builder.Services.AddHttpClient("ProjectApi", client =>
