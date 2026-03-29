@@ -1,0 +1,482 @@
+{
+  "groups": {
+    "Projects": {
+      "description": "Manage projects: create, update, archive, and manage project membership.",
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/projects",
+          "summary": "List all projects with optional filtering",
+          "description": "Retrieve a paginated list of all projects. Supports filtering by project status and owner. Uses offset-based pagination.",
+          "tags": ["projects", "list"],
+          "parameters": [
+            {"name": "status", "in": "query", "type": "string", "description": "Filter by project status (e.g. active, archived)", "required": false},
+            {"name": "owner_id", "in": "query", "type": "string", "description": "Filter by owner user ID (e.g. usr_001)", "required": false},
+            {"name": "limit", "in": "query", "type": "integer", "description": "Max results per page (1-100, default 20)", "required": false},
+            {"name": "offset", "in": "query", "type": "integer", "description": "Number of results to skip (default 0)", "required": false}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": [
+              {"id": "prj_001", "name": "Website Redesign", "status": "active", "owner_id": "usr_001"}
+            ],
+            "pagination": {"limit": 20, "offset": 0, "total": 3}
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/projects",
+          "summary": "Create a new project",
+          "description": "Create a new project with a name, description, and optional owner. The authenticated user becomes the owner if no owner_id is provided. The owner is automatically added as a project member with the 'owner' role.",
+          "tags": ["projects", "create"],
+          "parameters": [],
+          "request_body": {
+            "type": "object",
+            "required": ["name", "description"],
+            "properties": {
+              "name": {"type": "string", "description": "Project name"},
+              "description": {"type": "string", "description": "Project description"},
+              "owner_id": {"type": "string", "description": "User ID of the project owner (defaults to authenticated user)"},
+              "default_task_template": {"type": "string", "description": "Default template for new tasks"}
+            }
+          },
+          "response_example": {
+            "ok": true,
+            "data": {"id": "prj_004", "name": "New Project", "status": "active", "owner_id": "usr_001"}
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/projects/{id}",
+          "summary": "Get a single project by ID",
+          "description": "Retrieve the full details of a specific project including name, description, status, owner, and timestamps.",
+          "tags": ["projects", "detail"],
+          "parameters": [
+            {"name": "id", "in": "path", "type": "string", "description": "Project ID (e.g. prj_001)", "required": true}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": {"id": "prj_001", "name": "Website Redesign", "description": "Complete overhaul of the company website", "status": "active", "owner_id": "usr_001"}
+          }
+        },
+        {
+          "method": "PUT",
+          "path": "/projects/{id}",
+          "summary": "Update a project's details",
+          "description": "Update one or more fields of an existing project. Only provided fields are updated; others remain unchanged. Can update name, description, status, owner, and default task template.",
+          "tags": ["projects", "update"],
+          "parameters": [
+            {"name": "id", "in": "path", "type": "string", "description": "Project ID (e.g. prj_001)", "required": true}
+          ],
+          "request_body": {
+            "type": "object",
+            "required": [],
+            "properties": {
+              "name": {"type": "string", "description": "New project name"},
+              "description": {"type": "string", "description": "New project description"},
+              "status": {"type": "string", "description": "New project status"},
+              "owner_id": {"type": "string", "description": "New owner user ID"},
+              "default_task_template": {"type": "string", "description": "New default task template"}
+            }
+          },
+          "response_example": {
+            "ok": true,
+            "data": {"id": "prj_001", "name": "Website Redesign v2", "status": "active", "owner_id": "usr_001"}
+          }
+        },
+        {
+          "method": "DELETE",
+          "path": "/projects/{id}",
+          "summary": "Archive (soft-delete) a project",
+          "description": "Archive a project by setting its status to 'archived'. This is a soft delete — the project data is preserved but the project is marked as inactive.",
+          "tags": ["projects", "delete", "archive"],
+          "parameters": [
+            {"name": "id", "in": "path", "type": "string", "description": "Project ID (e.g. prj_001)", "required": true}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": {"id": "prj_001", "status": "archived"}
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/projects/{id}/members",
+          "summary": "List members of a project",
+          "description": "Retrieve all members assigned to a project, including their user IDs, roles, names, and email addresses.",
+          "tags": ["projects", "members", "list"],
+          "parameters": [
+            {"name": "id", "in": "path", "type": "string", "description": "Project ID (e.g. prj_001)", "required": true}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": [
+              {"user_id": "usr_001", "role": "owner", "name": "Alice Chen", "email": "alice@madeuptasks.dev"}
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/projects/{id}/members",
+          "summary": "Add a member to a project",
+          "description": "Add a user to a project with a specified role. The user must exist. Roles include 'owner', 'member', 'viewer'. Defaults to 'member' if not specified.",
+          "tags": ["projects", "members", "create"],
+          "parameters": [
+            {"name": "id", "in": "path", "type": "string", "description": "Project ID (e.g. prj_001)", "required": true}
+          ],
+          "request_body": {
+            "type": "object",
+            "required": ["user_id"],
+            "properties": {
+              "user_id": {"type": "string", "description": "User ID to add (e.g. usr_003)"},
+              "role": {"type": "string", "description": "Role in project: owner, member, viewer (default: member)"}
+            }
+          },
+          "response_example": {
+            "ok": true,
+            "data": {"project_id": "prj_001", "user_id": "usr_003", "role": "member"}
+          }
+        }
+      ]
+    },
+    "Tasks": {
+      "description": "Create, search, update, delete, and transition tasks through workflow states.",
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/projects/{project_id}/tasks",
+          "summary": "List tasks in a project",
+          "description": "Retrieve tasks belonging to a specific project. Supports filtering by status, assignee, and priority. Uses cursor-based pagination — pass the 'cursor' value from the response to get the next page.",
+          "tags": ["tasks", "list", "project"],
+          "parameters": [
+            {"name": "project_id", "in": "path", "type": "string", "description": "Project ID (e.g. prj_001)", "required": true},
+            {"name": "status", "in": "query", "type": "string", "description": "Filter by task status (open, in_progress, in-review, done, blocked)", "required": false},
+            {"name": "assignee_id", "in": "query", "type": "string", "description": "Filter by assignee user ID", "required": false},
+            {"name": "priority", "in": "query", "type": "string", "description": "Filter by priority (low, medium, high)", "required": false},
+            {"name": "cursor", "in": "query", "type": "string", "description": "Pagination cursor from previous response", "required": false},
+            {"name": "limit", "in": "query", "type": "integer", "description": "Max results per page (1-100, default 20)", "required": false}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": [
+              {"id": "tsk_001", "title": "Design homepage mockup", "status": "in_progress", "assignee_id": "usr_002", "priority": "high"}
+            ],
+            "pagination": {"next_cursor": "MjA=", "has_more": true}
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/projects/{project_id}/tasks",
+          "summary": "Create a new task in a project",
+          "description": "Create a task within the specified project. The task starts in 'open' status. You can set a title, description, assignee, priority (low/medium/high), due date, and labels.",
+          "tags": ["tasks", "create"],
+          "parameters": [
+            {"name": "project_id", "in": "path", "type": "string", "description": "Project ID (e.g. prj_001)", "required": true}
+          ],
+          "request_body": {
+            "type": "object",
+            "required": ["title"],
+            "properties": {
+              "title": {"type": "string", "description": "Task title"},
+              "description": {"type": "string", "description": "Detailed task description"},
+              "assignee_id": {"type": "string", "description": "User ID to assign the task to"},
+              "priority": {"type": "string", "description": "Priority level: low, medium, high (default: medium)"},
+              "due_date": {"type": "string", "description": "Due date in ISO 8601 format (e.g. 2025-03-01T00:00:00Z)"},
+              "labels": {"type": "array", "description": "List of label strings"}
+            }
+          },
+          "response_example": {
+            "ok": true,
+            "data": {"id": "tsk_020", "title": "New task", "status": "open", "priority": "medium", "project_id": "prj_001"}
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/tasks/{id}",
+          "summary": "Get a single task by ID",
+          "description": "Retrieve the full details of a specific task, including title, description, status, priority, assignee, project, labels, due date, and timestamps.",
+          "tags": ["tasks", "detail"],
+          "parameters": [
+            {"name": "id", "in": "path", "type": "string", "description": "Task ID (e.g. tsk_001)", "required": true}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": {"id": "tsk_001", "title": "Design homepage mockup", "status": "in_progress", "priority": "high", "assignee_id": "usr_002", "project_id": "prj_001"}
+          }
+        },
+        {
+          "method": "PUT",
+          "path": "/tasks/{id}",
+          "summary": "Update a task's fields",
+          "description": "Update one or more fields of an existing task. Only provided fields are updated. Can update title, description, assignee, priority, due date, and labels. Does NOT change status — use the transition endpoint for that.",
+          "tags": ["tasks", "update"],
+          "parameters": [
+            {"name": "id", "in": "path", "type": "string", "description": "Task ID (e.g. tsk_001)", "required": true}
+          ],
+          "request_body": {
+            "type": "object",
+            "required": [],
+            "properties": {
+              "title": {"type": "string", "description": "New task title"},
+              "description": {"type": "string", "description": "New task description"},
+              "assignee_id": {"type": "string", "description": "New assignee user ID"},
+              "priority": {"type": "string", "description": "New priority: low, medium, high"},
+              "due_date": {"type": "string", "description": "New due date in ISO 8601 format"},
+              "labels": {"type": "array", "description": "New list of label strings (replaces existing)"}
+            }
+          },
+          "response_example": {
+            "ok": true,
+            "data": {"id": "tsk_001", "title": "Updated title", "status": "in_progress", "priority": "high"}
+          }
+        },
+        {
+          "method": "DELETE",
+          "path": "/tasks/{id}",
+          "summary": "Hard-delete a task (no undo)",
+          "description": "Permanently delete a task. WARNING: This is a hard delete with no undo. The task and all associated data are removed immediately.",
+          "tags": ["tasks", "delete", "dangerous"],
+          "parameters": [
+            {"name": "id", "in": "path", "type": "string", "description": "Task ID (e.g. tsk_001)", "required": true}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": {"id": "tsk_001", "deleted": true}
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/tasks/{id}/transition",
+          "summary": "Transition a task to a new status",
+          "description": "Move a task to a new workflow status. The transition must be valid according to the state machine: open -> in_progress/blocked, in_progress -> in-review/blocked, in-review -> done/in_progress, blocked -> open/in_progress, done -> (terminal). Returns the previous status, new status, and available next transitions.",
+          "tags": ["tasks", "transition", "status", "workflow"],
+          "parameters": [
+            {"name": "id", "in": "path", "type": "string", "description": "Task ID (e.g. tsk_001)", "required": true}
+          ],
+          "request_body": {
+            "type": "object",
+            "required": ["to"],
+            "properties": {
+              "to": {"type": "string", "description": "Target status: open, in_progress, in-review, done, blocked"}
+            }
+          },
+          "response_example": {
+            "ok": true,
+            "data": {"id": "tsk_001", "title": "Design homepage mockup", "previous_status": "open", "new_status": "in_progress", "available_transitions": ["in-review", "blocked"]}
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/tasks/search",
+          "summary": "Search tasks across all projects",
+          "description": "Search for tasks globally using full-text search and filters. The 'q' parameter does substring matching on task titles and descriptions. Supports offset-based pagination with page and per_page.",
+          "tags": ["tasks", "search"],
+          "parameters": [
+            {"name": "q", "in": "query", "type": "string", "description": "Full-text search query (matches title and description)", "required": false},
+            {"name": "project_id", "in": "query", "type": "string", "description": "Filter by project ID", "required": false},
+            {"name": "status", "in": "query", "type": "string", "description": "Filter by task status", "required": false},
+            {"name": "assignee_id", "in": "query", "type": "string", "description": "Filter by assignee user ID", "required": false},
+            {"name": "page", "in": "query", "type": "integer", "description": "Page number (default 1)", "required": false},
+            {"name": "per_page", "in": "query", "type": "integer", "description": "Results per page (1-100, default 20)", "required": false}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": [
+              {"id": "tsk_005", "title": "Fix login bug", "status": "open", "assignee_id": "usr_003", "project_id": "prj_002"}
+            ],
+            "pagination": {"page": 1, "per_page": 20, "total": 1}
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/tasks/bulk-update",
+          "summary": "Bulk-update multiple tasks at once",
+          "description": "Apply the same set of field updates to multiple tasks in a single request. Accepts a list of task IDs and an updates object. Maximum 100 tasks per request. Returns only the count of updated tasks (not the updated tasks themselves).",
+          "tags": ["tasks", "bulk", "update"],
+          "parameters": [],
+          "request_body": {
+            "type": "object",
+            "required": ["task_ids", "updates"],
+            "properties": {
+              "task_ids": {"type": "array", "description": "List of task IDs to update (max 100)"},
+              "updates": {"type": "object", "description": "Object of field:value pairs to apply to all listed tasks"}
+            }
+          },
+          "response_example": {
+            "ok": true,
+            "data": {"updated_count": 3}
+          }
+        }
+      ]
+    },
+    "Users": {
+      "description": "Look up users by ID, name, role, or retrieve the current authenticated user.",
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/users",
+          "summary": "List all users with optional filtering",
+          "description": "Retrieve a paginated list of users. Supports filtering by role, team, and name (case-insensitive substring match). Uses offset-based pagination.",
+          "tags": ["users", "list"],
+          "parameters": [
+            {"name": "role", "in": "query", "type": "string", "description": "Filter by user role", "required": false},
+            {"name": "team_id", "in": "query", "type": "string", "description": "Filter by team ID", "required": false},
+            {"name": "name", "in": "query", "type": "string", "description": "Filter by name (case-insensitive substring match)", "required": false},
+            {"name": "limit", "in": "query", "type": "integer", "description": "Max results per page (1-100, default 50)", "required": false},
+            {"name": "offset", "in": "query", "type": "integer", "description": "Number of results to skip (default 0)", "required": false}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": [
+              {"id": "usr_001", "name": "Alice Chen", "email": "alice@madeuptasks.dev", "role": "admin"}
+            ],
+            "pagination": {"limit": 50, "offset": 0, "total": 5}
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/users/{id}",
+          "summary": "Get a single user by ID",
+          "description": "Retrieve the full profile of a specific user by their user ID, including name, email, role, and team information.",
+          "tags": ["users", "detail"],
+          "parameters": [
+            {"name": "id", "in": "path", "type": "string", "description": "User ID (e.g. usr_001)", "required": true}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": {"id": "usr_001", "name": "Alice Chen", "email": "alice@madeuptasks.dev", "role": "admin"}
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/users/me",
+          "summary": "Get the currently authenticated user",
+          "description": "Retrieve the profile of the user identified by the current authentication token. Useful for determining who is making requests.",
+          "tags": ["users", "auth", "current"],
+          "parameters": [],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": {"id": "usr_001", "name": "Alice Chen", "email": "alice@madeuptasks.dev", "role": "admin"}
+          }
+        }
+      ]
+    },
+    "Comments": {
+      "description": "Read and post comments on tasks for team discussion.",
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/tasks/{task_id}/comments",
+          "summary": "List comments on a task",
+          "description": "Retrieve a paginated list of comments for a specific task, ordered by creation time. Supports offset-based pagination.",
+          "tags": ["comments", "list", "task"],
+          "parameters": [
+            {"name": "task_id", "in": "path", "type": "string", "description": "Task ID (e.g. tsk_001)", "required": true},
+            {"name": "limit", "in": "query", "type": "integer", "description": "Max results per page (1-100, default 20)", "required": false},
+            {"name": "offset", "in": "query", "type": "integer", "description": "Number of results to skip (default 0)", "required": false}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": [
+              {"id": "cmt_001", "task_id": "tsk_001", "author_id": "usr_001", "body": "Looks great, moving to review.", "created_at": "2025-01-15T10:30:00Z"}
+            ],
+            "pagination": {"limit": 20, "offset": 0, "total": 3}
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/tasks/{task_id}/comments",
+          "summary": "Add a comment to a task",
+          "description": "Post a new comment on a task. The comment is attributed to the authenticated user. Supports threaded replies via optional parent_comment_id.",
+          "tags": ["comments", "create", "task"],
+          "parameters": [
+            {"name": "task_id", "in": "path", "type": "string", "description": "Task ID (e.g. tsk_001)", "required": true}
+          ],
+          "request_body": {
+            "type": "object",
+            "required": ["body"],
+            "properties": {
+              "body": {"type": "string", "description": "Comment text"},
+              "parent_comment_id": {"type": "string", "description": "ID of parent comment for threading (optional)"}
+            }
+          },
+          "response_example": {
+            "ok": true,
+            "data": {"id": "cmt_010", "task_id": "tsk_001", "author_id": "usr_001", "body": "Added the new designs.", "created_at": "2025-02-01T14:00:00Z"}
+          }
+        }
+      ]
+    },
+    "Attachments": {
+      "description": "Upload file metadata and retrieve download URLs for task attachments.",
+      "endpoints": [
+        {
+          "method": "GET",
+          "path": "/tasks/{task_id}/attachments",
+          "summary": "List attachments on a task",
+          "description": "Retrieve all file attachments associated with a specific task, including filename, size, MIME type, and upload metadata.",
+          "tags": ["attachments", "list", "task"],
+          "parameters": [
+            {"name": "task_id", "in": "path", "type": "string", "description": "Task ID (e.g. tsk_001)", "required": true}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": [
+              {"id": "att_001", "task_id": "tsk_001", "filename": "mockup_v2.png", "size": 245000, "mime_type": "image/png", "uploaded_by": "usr_002"}
+            ]
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/tasks/{task_id}/attachments",
+          "summary": "Upload attachment metadata for a task",
+          "description": "Register a new file attachment for a task by providing file metadata (filename, size, MIME type). Returns the attachment record and a pre-signed upload URL for the actual file upload.",
+          "tags": ["attachments", "create", "upload", "task"],
+          "parameters": [
+            {"name": "task_id", "in": "path", "type": "string", "description": "Task ID (e.g. tsk_001)", "required": true}
+          ],
+          "request_body": {
+            "type": "object",
+            "required": ["filename", "size", "mime_type"],
+            "properties": {
+              "filename": {"type": "string", "description": "Original filename (e.g. report.pdf)"},
+              "size": {"type": "integer", "description": "File size in bytes"},
+              "mime_type": {"type": "string", "description": "MIME type (e.g. application/pdf, image/png)"}
+            }
+          },
+          "response_example": {
+            "ok": true,
+            "data": {"attachment": {"id": "att_005", "task_id": "tsk_001", "filename": "report.pdf", "size": 102400, "mime_type": "application/pdf"}, "upload_url": "https://storage.madeuptasks.dev/upload/att_005/abc123"}
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/attachments/{id}/url",
+          "summary": "Get a temporary download URL for an attachment",
+          "description": "Generate a pre-signed, time-limited download URL for a specific attachment. The URL expires after 3600 seconds (1 hour).",
+          "tags": ["attachments", "download", "url"],
+          "parameters": [
+            {"name": "id", "in": "path", "type": "string", "description": "Attachment ID (e.g. att_001)", "required": true}
+          ],
+          "request_body": null,
+          "response_example": {
+            "ok": true,
+            "data": {"attachment_id": "att_001", "download_url": "https://storage.madeuptasks.dev/download/att_001/xyz789?expires=3600", "expires_in": 3600}
+          }
+        }
+      ]
+    }
+  }
+}

@@ -42,3 +42,4 @@ obj/
 project.lock.json
 .vs/
 *.DotSettings.user
+API_ENDPOINTS.md
