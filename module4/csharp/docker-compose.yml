@@ -3,7 +3,7 @@ version: "3.9"
 services:
   keycloak:
     image: quay.io/keycloak/keycloak:latest
-    command: start-dev --import-realm --features=token-exchange,admin-fine-grained-authz
+    command: start-dev --import-realm
     ports:
       - "8080:8080"
     volumes:
