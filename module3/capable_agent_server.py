@@ -7,9 +7,12 @@ another tool.
 """
 
 import anyio
+from pathlib import Path
 from agent_framework import Agent, MCPStdioTool
 from agent_framework.anthropic import AnthropicClient
 from dotenv import load_dotenv
+
+MODULE2_DIR = str(Path(__file__).resolve().parent.parent / "module2")
 
 load_dotenv()
 
@@ -19,6 +22,7 @@ madeuptasks_meta = MCPStdioTool(
     command="python3",
     args=["-m", "madeuptasks_mcp_meta"],
     env={
+        "PYTHONPATH": MODULE2_DIR + "/madeuptasks-mcp-meta",
         "MADEUPTASKS_API_URL": "http://localhost:8090/api/v1",
         "MADEUPTASKS_API_TOKEN": "tf_token_alice",
     },

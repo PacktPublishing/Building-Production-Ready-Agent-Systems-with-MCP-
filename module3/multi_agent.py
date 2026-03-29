@@ -8,10 +8,14 @@ This demonstrates agent-as-tool composition over MCP: the same protocol
 used for tool servers also connects agents to each other.
 """
 
+import os
+from pathlib import Path
 from agent_framework import Agent, MCPStdioTool
 from agent_framework.ollama import OllamaChatClient
 from agent_framework.devui import serve
 from dotenv import load_dotenv
+
+MODULE2_DIR = str(Path(__file__).resolve().parent.parent / "module2")
 
 load_dotenv()
 
@@ -21,6 +25,7 @@ logical_tools = MCPStdioTool(
     command="python3",
     args=["-m", "madeuptasks_mcp_logical"],
     env={
+        "PYTHONPATH": MODULE2_DIR + "/madeuptasks-mcp-logical",
         "MADEUPTASKS_API_URL": "http://localhost:8090/api/v1",
         "MADEUPTASKS_API_TOKEN": "tf_token_alice",
     },
@@ -33,7 +38,7 @@ expert_agent = MCPStdioTool(
     command="python3",
     args=["capable_agent_server.py"],
     env={
-        "ANTHROPIC_API_KEY": "",  # inherited from .env via dotenv
+        "ANTHROPIC_API_KEY": os.environ.get("ANTHROPIC_API_KEY", ""),
         "MADEUPTASKS_API_URL": "http://localhost:8090/api/v1",
         "MADEUPTASKS_API_TOKEN": "tf_token_alice",
     },
