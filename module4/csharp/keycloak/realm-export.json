@@ -209,7 +209,13 @@
       "protocol": "openid-connect",
       "fullScopeAllowed": false,
       "defaultClientScopes": ["openid", "email", "profile"],
-      "optionalClientScopes": ["tasks:read", "tasks:admin"]
+      "optionalClientScopes": ["tasks:read", "tasks:admin"],
+      "attributes": {
+        "oidc.ciba.grant.enabled": "false",
+        "oauth2.device.authorization.grant.enabled": "false",
+        "client.use.lightweight.access.token.enabled": "false",
+        "standard.token.exchange.enabled": "true"
+      }
     },
     {
       "clientId": "mcp-client",
